@@ -1,2 +1,5 @@
 export { default as Home } from './Home'
 export { default as Auth } from './Auth'
+export { default as Scan } from './Scan'
+export { default as Purchase } from './Purchase'
+export { default as Balance } from './Balance'

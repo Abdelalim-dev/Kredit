@@ -9,18 +9,16 @@
 import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { Home, Auth } from './src/screens'
-import { SafeAreaView } from 'react-native';
+
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   return (
     <NavigationContainer>
-      <SafeAreaView>
-        {isLoggedIn ?
-          <Home /> :
-          <Auth />
-        }
-      </SafeAreaView>
+      {isLoggedIn ?
+        <Home /> :
+        <Auth />
+      }
     </NavigationContainer>
   );
 };
