@@ -1,6 +1,7 @@
 import { View, Text, SafeAreaView, Button } from 'react-native'
 import React, { useContext } from 'react'
 import { SessionContext } from '../../App'
+import i18next from 'i18next';
 
 export default function Auth() {
     const session = useContext(SessionContext)
