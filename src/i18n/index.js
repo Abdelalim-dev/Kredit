@@ -1,10 +1,10 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
-import en from './en';
-import ha from './ha';
-import ibo from './ibo';
-import yo from './yo';
+import en from './locals/en';
+import ha from './locals/ha';
+import ibo from './locals/ibo';
+import yo from './locals/yo';
 
 export const init = (lang = 'en') => {
     i18n.use(initReactI18next)
