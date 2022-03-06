@@ -6,19 +6,28 @@
  * @flow strict-local
  */
 
-import React, { useState } from 'react';
+import React, { useState, createContext } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { Home, Auth } from './src/screens'
+
+export const SessionContext = createContext()
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
+  const session = {
+    isLoggedIn,
+    changeSession: (isLoggedIn) => setIsLoggedIn(isLoggedIn)
+  }
+
   return (
     <NavigationContainer>
-      {isLoggedIn ?
-        <Home /> :
-        <Auth />
-      }
+      <SessionContext.Provider value={session}>
+        {isLoggedIn ?
+          <Home /> :
+          <Auth />
+        }
+      </SessionContext.Provider>
     </NavigationContainer>
   );
 };
