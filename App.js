@@ -10,6 +10,7 @@ import React, { useState, createContext } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { Home, Auth } from './src/screens'
 import i18next from 'i18next';
+import { withTranslation } from 'react-i18next';
 import * as i18n from './src/i18n'
 
 export const SessionContext = createContext()
@@ -40,4 +41,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default withTranslation()(App);
