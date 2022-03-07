@@ -13,7 +13,7 @@ export default function Auth() {
 
     return (
         <SafeAreaView>
-            <Text>{session.isLoggedIn ? "IN" : "OUT"}</Text>
+            <Text>Language is {_('lang')}</Text>
             <Button title="Login" onPress={login} />
         </SafeAreaView>
     )
