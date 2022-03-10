@@ -14,6 +14,7 @@ import i18next from 'i18next';
 import { withTranslation } from 'react-i18next';
 import * as i18n from './src/i18n'
 import * as i18nPersistance from './src/i18n/persistance'
+import theme from './src/theme'
 
 export const SessionContext = createContext()
 
@@ -40,7 +41,7 @@ const App = () => {
 
   return (
     <NavigationContainer>
-      <PaperProvider>
+      <PaperProvider theme={theme}>
         <SessionContext.Provider value={session}>
           {isLoggedIn ?
             <Home /> :
