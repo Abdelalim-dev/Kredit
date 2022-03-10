@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { View, Text } from 'react-native'
 import { InputStyled, HelperTextStyled } from './styles'
 
@@ -11,6 +11,7 @@ export default function Input(props) {
         <View>
             <InputStyled
                 mode='outlined'
+                // dense={true}
                 {...props}
             />
             <HelperTextStyled type="error" visible={hasErrors && hasErrors()}>
