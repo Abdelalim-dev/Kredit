@@ -1,7 +1,7 @@
-import { Text, Button } from 'react-native'
+import { Text } from 'react-native'
 import React, { useContext, useState } from 'react'
 import { SessionContext } from '../../App'
-import { Input, SafeArea } from '../components'
+import { Input, SafeArea, Button } from '../components'
 import { ScrollView } from '../components/styles'
 
 export default function Auth() {
@@ -24,10 +24,6 @@ export default function Auth() {
     return (
         <SafeArea>
             <ScrollView>
-
-                <Text>Language is {_('lang')}</Text>
-                <Button title="Login" onPress={login} />
-
                 <Input
                     keyboardType="phone-pad"
                     autoComplete="tel"
@@ -68,6 +64,11 @@ export default function Auth() {
                         errorMessage: bankErrMsg,
                     }}
                 />
+
+                <Button
+                    onPress={login}>
+                    Login
+                </Button>
             </ScrollView>
         </SafeArea>
     )
