@@ -1,0 +1,1 @@
+export const operators = ['MTN', '9mobile', 'Airtel', 'Glo']
