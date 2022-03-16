@@ -1,6 +1,7 @@
 const translation = {
     lang: "English",
     phone1: "Phone 1",
+    additionalInfo: "Additional infos",
     sim1: "SIM 1",
     phone2: "Phone 2",
     sim2: "SIM 2",

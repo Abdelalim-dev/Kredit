@@ -1,8 +1,18 @@
 import React, { useContext, useState } from 'react'
+import styled from 'styled-components'
 import { SessionContext } from '../../App'
 import { Input, SafeArea, Button } from '../components'
 import { ScrollView } from '../components/styles'
 import { OperatorMenu } from '../components'
+import { List } from 'react-native-paper';
+
+const VerticalSpace = styled.View`
+    margin-bottom: 16px;
+`
+
+const Image = styled.Image`
+    align-self: center;
+`
 
 export default function Auth() {
     const session = useContext(SessionContext)
@@ -26,6 +36,11 @@ export default function Auth() {
     return (
         <SafeArea>
             <ScrollView>
+
+                <Image source={require('../assets/images/logo.png')} />
+
+                <VerticalSpace />
+
                 <Input
                     keyboardType="phone-pad"
                     autoComplete="tel"
@@ -41,19 +56,6 @@ export default function Auth() {
                 <OperatorMenu label={_('sim1')} onItemSelected={setOp} />
 
                 <Input
-                    keyboardType="phone-pad"
-                    label={_('phone2')}
-                    value={phone2}
-                    onChangeText={text => setPhone2(text)}
-                    params={{
-                        icon: 'phone',
-                        errorMessage: phone2ErrMsg,
-                    }}
-                />
-
-                <OperatorMenu label={_('sim2')} onItemSelected={setOp2} />
-
-                <Input
                     label={_('iban')}
                     value={iban}
                     onChangeText={text => setIban(text)}
@@ -62,16 +64,37 @@ export default function Auth() {
                         errorMessage: ibanErrMsg,
                     }}
                 />
-                <Input
-                    keyboardType="phone-pad"
-                    label={_('bank')}
-                    value={bank}
-                    onChangeText={text => setBank(text)}
-                    params={{
-                        icon: 'bank',
-                        errorMessage: bankErrMsg,
-                    }}
-                />
+
+                <List.Accordion title={_('additionalInfo')}>
+
+                    <VerticalSpace />
+
+                    <Input
+                        keyboardType="phone-pad"
+                        label={_('phone2')}
+                        value={phone2}
+                        onChangeText={text => setPhone2(text)}
+                        params={{
+                            icon: 'phone',
+                            errorMessage: phone2ErrMsg,
+                        }}
+                    />
+
+                    <OperatorMenu label={_('sim2')} onItemSelected={setOp2} />
+
+                    <Input
+                        keyboardType="phone-pad"
+                        label={_('bank')}
+                        value={bank}
+                        onChangeText={text => setBank(text)}
+                        params={{
+                            icon: 'bank',
+                            errorMessage: bankErrMsg,
+                        }}
+                    />
+                </List.Accordion>
+
+                <VerticalSpace />
 
                 <Button
                     onPress={login}>
