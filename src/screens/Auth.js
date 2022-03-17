@@ -4,7 +4,7 @@ import { SessionContext } from '../../App'
 import { Input, SafeArea, Button } from '../components'
 import { ScrollView } from '../components/styles'
 import { OperatorMenu } from '../components'
-import { List } from 'react-native-paper';
+import { List, Dialog, Portal, Paragraph } from 'react-native-paper';
 import * as Linter from '../utils/Lint'
 
 const VerticalSpace = styled.View`
@@ -24,29 +24,58 @@ export default function Auth() {
     const [iban, setIban] = useState("");
     const [bank, setBank] = useState("");
 
+    const [errDlgVisible, setErrDlgVisible] = useState(false);
+
     const phoneRef = React.useRef()
     const opRef = React.useRef()
     const ibanRef = React.useRef()
     const phone2Ref = React.useRef()
     const op2Ref = React.useRef()
 
-    const login = () => {
-        // session.changeSession(true)
-        validateForm()
+    const register = () => {
+        const isValid = validateForm()
+        if (!isValid) return displayErrorDialog()
+
+        performLogin()
+    }
+
+    const displayErrorDialog = () => {
+        setErrDlgVisible(true)
+    }
+
+    const hideErrorDialog = () => setErrDlgVisible(false)
+
+    const performLogin = () => {
+        // Save locally
+        // ...
+        //session.changeSession(true)
     }
 
     const validateForm = () => {
         let isValid = phoneRef.current.isValid(Linter.phoneValidation())
         isValid = opRef.current.isValid(Linter.requiredValidation()) && isValid
         isValid = ibanRef.current.isValid(Linter.ibanValidation()) && isValid
-        
+
         // Initially undefined: Not rendered when accordion is contracted
-        if (phone2Ref.current) 
+        if (phone2Ref.current)
             isValid = phone2Ref.current.isValid(Linter.optionalPhoneValidation()) && isValid
         if (op2Ref.current)
             isValid = op2Ref.current.isValid(Linter.requiredIfValidation('phone2', phone2)) && isValid
         return isValid;
     }
+
+    const renderErrorDialog = () => (
+        <Portal>
+            <Dialog visible={errDlgVisible} onDismiss={hideErrorDialog}>
+                <Dialog.Content>
+                    <Paragraph>{_('validations.formError')}</Paragraph>
+                </Dialog.Content>
+                <Dialog.Actions>
+                    <Button mode="text" onPress={hideErrorDialog}>Done</Button>
+                </Dialog.Actions>
+            </Dialog>
+        </Portal>
+    )
 
     return (
         <SafeArea>
@@ -103,10 +132,9 @@ export default function Auth() {
 
                 <VerticalSpace />
 
-                <Button
-                    onPress={login}>
-                    Login
-                </Button>
+                <Button onPress={register}> {_('login')} </Button>
+
+                {renderErrorDialog()}
             </ScrollView>
         </SafeArea>
     )
