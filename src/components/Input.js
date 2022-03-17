@@ -8,7 +8,7 @@ function Input(props, ref) {
 
     const [errorMessage, setErrorMessage] = React.useState("")
 
-    React.useImperativeHandle(ref, () => ({ isValid , handleTextChange}));
+    React.useImperativeHandle(ref, () => ({ isValid, handleTextChange }));
 
     const handleTextChange = (text) => {
         const { onChangeText } = props;
@@ -45,7 +45,7 @@ function Input(props, ref) {
         return true
     }
 
-    const { icon } = props.params || {}
+    const { icon, right } = props.params || {}
     return (
         <View>
             <TextInput
@@ -56,6 +56,7 @@ function Input(props, ref) {
                 onChangeText={handleTextChange}
                 error={errorMessage != ""}
                 left={icon && <TextInput.Icon name={icon} />}
+                right={right}
             />
             <HelperText style={{ marginBottom: 10 }} type="error" visible={errorMessage != ""}>
                 {errorMessage || ""}

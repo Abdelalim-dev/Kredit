@@ -1,6 +1,6 @@
 import React from 'react'
 import Input from './Input'
-import { Menu, List } from 'react-native-paper';
+import { Menu, List, TextInput } from 'react-native-paper';
 import { operators } from '../utils/Constants'
 import styled from 'styled-components';
 
@@ -30,6 +30,13 @@ function OperatorMenu(props, ref) {
         closeMenu()
     }
 
+    const clear = () => {
+        const { onItemSelected } = props
+        setOperator("")
+        inputRef.current.handleTextChange("")
+        onItemSelected && onItemSelected("")
+    }
+
     return (
         <MenuStyled
             visible={visible}
@@ -41,7 +48,10 @@ function OperatorMenu(props, ref) {
                     label={props.label || _('sim')}
                     editable={false}
                     value={operator}
-                    params={{ icon: 'sim', }}
+                    params={{
+                        icon: 'sim',
+                        right: <TextInput.Icon name='close' onPress={clear} />,
+                    }}
                 />
             }>
             {operators.map((operator, index) =>
