@@ -25,6 +25,7 @@ function OperatorMenu(props, ref) {
     const handleOperatorSelect = (value) => {
         const { onItemSelected } = props
         setOperator(value)
+        inputRef.current.handleTextChange(value)
         onItemSelected && onItemSelected(value)
         closeMenu()
     }

@@ -8,7 +8,13 @@ function Input(props, ref) {
 
     const [errorMessage, setErrorMessage] = React.useState("")
 
-    React.useImperativeHandle(ref, () => ({ isValid }));
+    React.useImperativeHandle(ref, () => ({ isValid , handleTextChange}));
+
+    const handleTextChange = (text) => {
+        const { onChangeText } = props;
+        setErrorMessage("")
+        onChangeText && onChangeText(text);
+    }
 
     const isValid = (validations) => {
         const { OPTIONAL, REQUIRED, REQUIRED_IF, PHONE, IBAN } = Linter
@@ -47,6 +53,7 @@ function Input(props, ref) {
                 mode='outlined'
                 // dense={true}
                 autoCorrect={false}
+                onChangeText={handleTextChange}
                 error={errorMessage != ""}
                 left={icon && <TextInput.Icon name={icon} />}
             />
