@@ -1,15 +1,48 @@
 import React from 'react'
-import { View, Text } from 'react-native'
-import { InputStyled, HelperTextStyled } from './styles'
-import { TextInput } from 'react-native-paper';
+import { View } from 'react-native'
+import { TextInput, HelperText } from 'react-native-paper';
+import * as Linter from '../utils/Lint'
 
 
-export default function Input(props) {
+function Input(props, ref) {
 
-    const { icon, errorMessage } = props.params || {}
+    const [errorMessage, setErrorMessage] = React.useState("")
+
+    React.useImperativeHandle(ref, () => ({ isValid }));
+
+    const isValid = (validations) => {
+        const { OPTIONAL, REQUIRED, REQUIRED_IF, PHONE, IBAN } = Linter
+        const { value } = props
+
+        if (validations[REQUIRED] && !Linter.required(value)) {
+            setErrorMessage(_(`validations.${REQUIRED}`))
+            return false
+
+        } else if (validations[REQUIRED_IF]) {
+            const [otherField, otherValue] = validations[REQUIRED_IF]
+            if (!Linter.requiredIf(value, otherValue)) {
+                setErrorMessage(_(`validations.${REQUIRED_IF}`).replace(':attribute', `${_(otherField)}`))
+                return false
+            }
+        }
+
+        const isOptional = !!validations[OPTIONAL]
+
+        if (validations[PHONE] && !Linter.phone(value, isOptional)) {
+            setErrorMessage(_(`validations.${PHONE}`))
+            return false
+
+        } else if (validations[IBAN] && !Linter.iban(value, isOptional)) {
+            setErrorMessage(_(`validations.${IBAN}`))
+            return false
+        }
+        return true
+    }
+
+    const { icon } = props.params || {}
     return (
         <View>
-            <InputStyled
+            <TextInput
                 {...props}
                 mode='outlined'
                 // dense={true}
@@ -17,9 +50,11 @@ export default function Input(props) {
                 error={errorMessage != ""}
                 left={icon && <TextInput.Icon name={icon} />}
             />
-            <HelperTextStyled type="error" visible={errorMessage != null}>
+            <HelperText style={{ marginBottom: 10 }} type="error" visible={errorMessage != ""}>
                 {errorMessage || ""}
-            </HelperTextStyled>
+            </HelperText>
         </View>
     )
 }
+
+export default React.forwardRef(Input)

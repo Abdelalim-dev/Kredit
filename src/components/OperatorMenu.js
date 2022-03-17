@@ -1,7 +1,7 @@
 import React from 'react'
 import Input from './Input'
 import { Menu, List } from 'react-native-paper';
-import { operators } from '../Constants'
+import { operators } from '../utils/Constants'
 import styled from 'styled-components';
 
 const MenuStyled = styled(Menu)`
@@ -10,10 +10,14 @@ const MenuStyled = styled(Menu)`
     padding-bottom: 12px;
 `
 
-export default function OperatorMenu(props) {
+function OperatorMenu(props, ref) {
     const [visible, setVisible] = React.useState(false)
     const [operator, setOperator] = React.useState("")
-    const [operatorErrMsg, setOperatorErrMsg] = React.useState("")
+    const inputRef = React.useRef()
+
+    React.useImperativeHandle(ref, () => ({ isValid }))
+
+    const isValid = (validations) => inputRef.current.isValid(validations)
 
     const openMenu = () => setVisible(true);
     const closeMenu = () => setVisible(false);
@@ -31,14 +35,12 @@ export default function OperatorMenu(props) {
             onDismiss={closeMenu}
             anchor={
                 <Input
+                    ref={inputRef}
                     onPressIn={openMenu}
                     label={props.label || _('sim')}
                     editable={false}
                     value={operator}
-                    params={{
-                        icon: 'sim',
-                        errorMessage: operatorErrMsg,
-                    }}
+                    params={{ icon: 'sim', }}
                 />
             }>
             {operators.map((operator, index) =>
@@ -47,3 +49,5 @@ export default function OperatorMenu(props) {
         </MenuStyled>
     )
 }
+
+export default React.forwardRef(OperatorMenu)

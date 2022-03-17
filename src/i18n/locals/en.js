@@ -1,13 +1,20 @@
 const translation = {
     lang: "English",
+    phoneHint: "e.g. 08012345678",
     phone1: "Phone 1",
     additionalInfo: "Additional infos",
-    sim1: "SIM 1",
+    sim1: "Operator (SIM 1)",
     phone2: "Phone 2",
-    sim2: "SIM 2",
+    sim2: "Operator (SIM 2)",
     bank: "Bank name",
-    iban: "Bank number",
+    iban: "Bank number (To recharge your credit)",
     required: "required",
     optional: "optional",
+    validations: {
+        required: "Required field",
+        required_if: "Required field with :attribute",
+        phone: "Invalid phone number",
+        iban: "Invalid bank account number"
+    }
 };
 export default translation;
