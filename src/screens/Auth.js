@@ -6,6 +6,7 @@ import { ScrollView } from '../components/styles'
 import { OperatorMenu } from '../components'
 import { List, Dialog, Portal, Paragraph } from 'react-native-paper';
 import * as Linter from '../utils/Lint'
+import { SessionPersistence } from '../services/persistence'
 
 const VerticalSpace = styled.View`
     margin-bottom: 16px;
@@ -25,6 +26,15 @@ export default function Auth() {
     const [bank, setBank] = useState("");
 
     const [errDlgVisible, setErrDlgVisible] = useState(false);
+
+    React.useEffect(() => {
+        loadSessionData()
+    }, [])
+
+    loadSessionData = async () => {
+        let sessionData = await SessionPersistence.get(sessionData)
+        console.log({ sessionData })
+    }
 
     const phoneRef = React.useRef()
     const opRef = React.useRef()
@@ -46,9 +56,17 @@ export default function Auth() {
     const hideErrorDialog = () => setErrDlgVisible(false)
 
     const performLogin = () => {
-        // Save locally
-        // ...
-        //session.changeSession(true)
+        let sessionData = {
+            phone: phone,
+            operator: selectedOp,
+            iban: iban,
+            bank: bank,
+            phone2: phone2,
+            operator2: selectedOp2,
+        }
+        console.log({ sessionData })
+        SessionPersistence.save(sessionData)
+        session.changeSession(true)
     }
 
     const validateForm = () => {
