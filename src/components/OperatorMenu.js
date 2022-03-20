@@ -1,4 +1,5 @@
 import React from 'react'
+import { Platform } from 'react-native'
 import Input from './Input'
 import { Menu, List, TextInput } from 'react-native-paper';
 import { operators } from '../utils/Constants'
@@ -37,23 +38,26 @@ function OperatorMenu(props, ref) {
         onItemSelected && onItemSelected("")
     }
 
+    const menuAnchor = () => (
+        <Input
+            ref={inputRef}
+            onPressIn={openMenu}
+            label={props.label || _('sim')}
+            editable={false}
+            value={operator}
+            params={{
+                icon: 'sim',
+                right: <TextInput.Icon name='close' onPress={clear} />,
+                inputOverlay: Platform.OS == 'android'
+            }}
+        />
+    )
+
     return (
         <MenuStyled
             visible={visible}
             onDismiss={closeMenu}
-            anchor={
-                <Input
-                    ref={inputRef}
-                    onPressIn={openMenu}
-                    label={props.label || _('sim')}
-                    editable={false}
-                    value={operator}
-                    params={{
-                        icon: 'sim',
-                        right: <TextInput.Icon name='close' onPress={clear} />,
-                    }}
-                />
-            }>
+            anchor={menuAnchor()}>
             {operators.map((operator, index) =>
                 <List.Item key={index} title={operator} onPress={() => { handleOperatorSelect(operator) }} />
             )}

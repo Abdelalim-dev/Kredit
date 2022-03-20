@@ -3,6 +3,7 @@ const translation = {
     phoneHint: "e.g. 08012345678",
     phone1: "Phone 1",
     additionalInfo: "Additional infos",
+    sim: "SIM",
     sim1: "Operator (SIM 1)",
     phone2: "Phone 2",
     sim2: "Operator (SIM 2)",

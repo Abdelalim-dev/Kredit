@@ -1,8 +1,16 @@
 import React from 'react'
-import { View } from 'react-native'
 import { TextInput, HelperText } from 'react-native-paper';
 import * as Linter from '../utils/Lint'
+import styled from 'styled-components';
 
+const Overlay = styled.Text`
+    position: absolute;
+    height: ${({ dense }) => dense ? '40px' : '56px'};
+    left: ${({ left }) => left ? '42px' : 0};
+    right: ${({ right }) => right ? '42px' : 0};
+    top: 7px;
+`
+const View = styled.View``
 
 function Input(props, ref) {
 
@@ -45,19 +53,31 @@ function Input(props, ref) {
         return true
     }
 
-    const { icon, right } = props.params || {}
+    const { icon, right, inputOverlay } = props.params || {}
+    
+    /**
+     * A workaround to allow clicking on a non editable input on Android
+     * @returns React.ReactNode
+     */
+    const androidInputOverlay = () => (<Overlay
+        left={!!icon} right={!!right} dense={!!props.dense}
+        onPress={() => props.onPressIn && props.onPressIn()}>
+    </Overlay>)
+
     return (
         <View>
-            <TextInput
-                {...props}
-                mode='outlined'
-                // dense={true}
-                autoCorrect={false}
-                onChangeText={handleTextChange}
-                error={errorMessage != ""}
-                left={icon && <TextInput.Icon name={icon} />}
-                right={right}
-            />
+            <View>
+                <TextInput
+                    {...props}
+                    mode='outlined'
+                    autoCorrect={false}
+                    onChangeText={handleTextChange}
+                    error={errorMessage != ""}
+                    left={icon && <TextInput.Icon name={icon} />}
+                    right={right}
+                />
+                {inputOverlay && androidInputOverlay()}
+            </View>
             <HelperText style={{ marginBottom: 10 }} type="error" visible={errorMessage != ""}>
                 {errorMessage || ""}
             </HelperText>
