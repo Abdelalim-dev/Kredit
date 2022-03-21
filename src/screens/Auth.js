@@ -37,15 +37,6 @@ export default function Auth() {
     const [errMsgVisible, setErrMsgVisible] = useState(false);
     const [accordioExpanded, setExpanded] = useState(false);
 
-    React.useEffect(() => {
-        loadSessionData()
-    }, [])
-
-    loadSessionData = async () => {
-        let sessionData = await SessionPersistence.get(sessionData)
-        console.log({ sessionData })
-    }
-
     const phoneRef = React.useRef()
     const opRef = React.useRef()
     const ibanRef = React.useRef()
@@ -75,7 +66,6 @@ export default function Auth() {
             phone2: phone2,
             operator2: selectedOp2,
         }
-        console.log({ sessionData })
         SessionPersistence.save(sessionData)
         session.changeSession(true)
     }
