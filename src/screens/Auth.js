@@ -12,6 +12,10 @@ const VerticalSpace = styled.View`
     margin-bottom: 16px;
 `
 
+const DoubleVerticalSpace = styled.View`
+    margin-bottom: 32px;
+`
+
 const Image = styled.Image`
     align-self: center;
 `
@@ -26,6 +30,7 @@ export default function Auth() {
     const [bank, setBank] = useState("");
 
     const [errDlgVisible, setErrDlgVisible] = useState(false);
+    const [accordioExpanded, setExpanded] = useState(false);
 
     React.useEffect(() => {
         loadSessionData()
@@ -95,6 +100,8 @@ export default function Auth() {
         </Portal>
     )
 
+    const handleExpansion = () => setExpanded(!accordioExpanded)
+
     return (
         <SafeArea>
             <ScrollView>
@@ -106,6 +113,7 @@ export default function Auth() {
                 <Input
                     ref={phoneRef}
                     keyboardType="phone-pad"
+                    returnKeyType="next"
                     autoComplete="tel"
                     label={`${_('phone1')} (${_('phoneHint')})`}
                     value={phone}
@@ -117,19 +125,21 @@ export default function Auth() {
 
                 <Input
                     ref={ibanRef}
+                    returnKeyType={accordioExpanded ? "next" : "done"}
                     label={_('iban')}
                     value={iban}
                     onChangeText={text => setIban(text)}
                     params={{ icon: 'bank' }}
                 />
 
-                <List.Accordion title={_('additionalInfo')}>
+                <List.Accordion title={_('additionalInfo')} expanded={accordioExpanded} onPress={handleExpansion}>
 
                     <VerticalSpace />
 
                     <Input
                         ref={phone2Ref}
                         keyboardType="phone-pad"
+                        returnKeyType="next"
                         label={`${_('phone2')} (${_('phoneHint')})`}
                         value={phone2}
                         onChangeText={text => setPhone2(text)}
@@ -139,6 +149,7 @@ export default function Auth() {
                     <OperatorMenu ref={op2Ref} label={_('sim2')} onItemSelected={setOp2} />
 
                     <Input
+                        returnKeyType="done"
                         label={_('bank')}
                         value={bank}
                         onChangeText={text => setBank(text)}
@@ -148,7 +159,7 @@ export default function Auth() {
                     />
                 </List.Accordion>
 
-                <VerticalSpace />
+                {!accordioExpanded && <DoubleVerticalSpace />}
 
                 <Button onPress={register}> {_('login')} </Button>
 
