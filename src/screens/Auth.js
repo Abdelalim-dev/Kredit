@@ -4,7 +4,7 @@ import { SessionContext } from '../../App'
 import { Input, SafeArea, Button } from '../components'
 import { ScrollView } from '../components/styles'
 import { OperatorMenu } from '../components'
-import { List, Dialog, Portal, Paragraph } from 'react-native-paper';
+import { Divider, Caption } from 'react-native-paper';
 import * as Linter from '../utils/Lint'
 import { SessionPersistence } from '../services/persistence'
 
@@ -34,9 +34,6 @@ export default function Auth() {
     const [iban, setIban] = useState("");
     const [bank, setBank] = useState("");
 
-    const [errMsgVisible, setErrMsgVisible] = useState(false);
-    const [accordioExpanded, setExpanded] = useState(false);
-
     const phoneRef = React.useRef()
     const opRef = React.useRef()
     const ibanRef = React.useRef()
@@ -46,16 +43,10 @@ export default function Auth() {
 
     const register = () => {
         const isValid = validateForm()
-        if (!isValid) return displayErrorDialog()
+        if (!isValid) return
 
         performLogin()
     }
-
-    const displayErrorDialog = () => {
-        setErrMsgVisible(true)
-    }
-
-    const hideErrorDialog = () => setErrMsgVisible(false)
 
     const performLogin = () => {
         let sessionData = {
@@ -83,29 +74,13 @@ export default function Auth() {
         return isValid;
     }
 
-    const renderErrorMessage = () => (
-        <Portal>
-            <Dialog visible={errMsgVisible} onDismiss={hideErrorDialog}>
-                <Dialog.Content>
-                    <Paragraph>{_('validations.formError')}</Paragraph>
-                </Dialog.Content>
-                <Dialog.Actions>
-                    <Button mode="text" onPress={hideErrorDialog}>Done</Button>
-                </Dialog.Actions>
-            </Dialog>
-        </Portal>
-    )
-
-    const handleExpansion = () => setExpanded(!accordioExpanded)
-
     const onReturn = (field) => {
         switch (field) {
             case FIELD_PHONE:
                 ibanRef.current.focus()
                 break
             case FIELD_IBAN:
-                if (accordioExpanded) phone2Ref.current.focus()
-                else register()
+                phone2Ref.current.focus()
                 break
             case FIELD_PHONE2:
                 bankRef.current.focus()
@@ -140,7 +115,7 @@ export default function Auth() {
 
                 <Input
                     ref={ibanRef}
-                    returnKeyType={accordioExpanded ? "next" : "done"}
+                    returnKeyType="next"
                     onSubmitEditing={() => onReturn(FIELD_IBAN)}
                     label={_('iban')}
                     value={iban}
@@ -148,41 +123,36 @@ export default function Auth() {
                     params={{ icon: 'bank' }}
                 />
 
-                <List.Accordion title={_('additionalInfo')} expanded={accordioExpanded} onPress={handleExpansion}>
+                <Caption>{_('additionalInfo')}</Caption>
+                <Divider />
+                <VerticalSpace />
 
-                    <VerticalSpace />
+                <Input
+                    ref={phone2Ref}
+                    keyboardType="phone-pad"
+                    returnKeyType="next"
+                    onSubmitEditing={() => onReturn(FIELD_PHONE2)}
+                    label={`${_('phone2')} (${_('phoneHint')})`}
+                    value={phone2}
+                    onChangeText={text => setPhone2(text)}
+                    params={{ icon: 'phone' }}
+                    dense={true}
+                />
 
-                    <Input
-                        ref={phone2Ref}
-                        keyboardType="phone-pad"
-                        returnKeyType="next"
-                        onSubmitEditing={() => onReturn(FIELD_PHONE2)}
-                        label={`${_('phone2')} (${_('phoneHint')})`}
-                        value={phone2}
-                        onChangeText={text => setPhone2(text)}
-                        params={{ icon: 'phone' }}
-                    />
+                <OperatorMenu ref={op2Ref} dense={true} label={_('sim2')} onItemSelected={setOp2} />
 
-                    <OperatorMenu ref={op2Ref} label={_('sim2')} onItemSelected={setOp2} />
-
-                    <Input
-                        ref={bankRef}
-                        returnKeyType="done"
-                        onSubmitEditing={() => onReturn(FIELD_BANK)}
-                        label={_('bank')}
-                        value={bank}
-                        onChangeText={text => setBank(text)}
-                        params={{
-                            icon: 'bank',
-                        }}
-                    />
-                </List.Accordion>
-
-                {!accordioExpanded && <DoubleVerticalSpace />}
+                <Input
+                    ref={bankRef}
+                    returnKeyType="done"
+                    onSubmitEditing={() => onReturn(FIELD_BANK)}
+                    label={_('bank')}
+                    value={bank}
+                    onChangeText={text => setBank(text)}
+                    params={{ icon: 'bank' }}
+                    dense={true}
+                />
 
                 <Button onPress={register}> {_('login')} </Button>
-
-                {renderErrorMessage()}
             </ScrollView>
         </SafeArea>
     )

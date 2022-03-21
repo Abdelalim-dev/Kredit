@@ -69,7 +69,7 @@ function Input(props, ref) {
     </Overlay>)
 
     return (
-        <View>
+        <View style={{ marginBottom: 4, ...props.containerStyle }}>
             <View>
                 <TextInput
                     ref={inputRef}
@@ -83,8 +83,8 @@ function Input(props, ref) {
                 />
                 {inputOverlay && androidInputOverlay()}
             </View>
-            <HelperText style={{ marginBottom: 10 }} type="error" visible={errorMessage != ""}>
-                {errorMessage || ""}
+            <HelperText type="error" visible={errorMessage != ""}>
+                {errorMessage}
             </HelperText>
         </View>
     )
