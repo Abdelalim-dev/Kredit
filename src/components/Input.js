@@ -16,7 +16,11 @@ function Input(props, ref) {
 
     const [errorMessage, setErrorMessage] = React.useState("")
 
-    React.useImperativeHandle(ref, () => ({ isValid, handleTextChange }));
+    const inputRef = React.useRef()
+
+    React.useImperativeHandle(ref, () => ({ isValid, handleTextChange, focus }));
+
+    const focus = () => inputRef.current.focus()
 
     const handleTextChange = (text) => {
         const { onChangeText } = props;
@@ -54,7 +58,7 @@ function Input(props, ref) {
     }
 
     const { icon, right, inputOverlay } = props.params || {}
-    
+
     /**
      * A workaround to allow clicking on a non editable input on Android
      * @returns React.ReactNode
@@ -68,6 +72,7 @@ function Input(props, ref) {
         <View>
             <View>
                 <TextInput
+                    ref={inputRef}
                     {...props}
                     mode='outlined'
                     autoCorrect={false}
