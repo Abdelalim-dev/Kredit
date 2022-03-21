@@ -20,6 +20,9 @@ const Image = styled.Image`
     align-self: center;
 `
 
+const KeyboardAvoidingView = styled.KeyboardAvoidingView`
+`
+
 const FIELD_PHONE = "phone"
 const FIELD_IBAN = "iban"
 const FIELD_PHONE2 = "phone2"
@@ -93,67 +96,69 @@ export default function Auth() {
 
     return (
         <SafeArea>
-            <ScrollView>
+            <KeyboardAvoidingView behavior={Platform.OS == 'ios' ? "position" : "height"}>
+                <ScrollView keyboardShouldPersistTaps="handled">
 
-                <Image source={require('../assets/images/logo.png')} />
+                    <Image source={require('../assets/images/logo.png')} />
 
-                <VerticalSpace />
+                    <VerticalSpace />
 
-                <Input
-                    ref={phoneRef}
-                    keyboardType="phone-pad"
-                    returnKeyType="next"
-                    autoComplete="tel"
-                    onSubmitEditing={() => onReturn(FIELD_PHONE)}
-                    label={`${_('phone1')} (${_('phoneHint')})`}
-                    value={phone}
-                    onChangeText={text => setPhone(text)}
-                    params={{ icon: 'phone' }}
-                />
+                    <Input
+                        ref={phoneRef}
+                        keyboardType="phone-pad"
+                        returnKeyType="next"
+                        autoComplete="tel"
+                        onSubmitEditing={() => onReturn(FIELD_PHONE)}
+                        label={`${_('phone1')} (${_('phoneHint')})`}
+                        value={phone}
+                        onChangeText={text => setPhone(text)}
+                        params={{ icon: 'phone' }}
+                    />
 
-                <OperatorMenu ref={opRef} label={_('sim1')} onItemSelected={setOp} />
+                    <OperatorMenu ref={opRef} label={_('sim1')} onItemSelected={setOp} />
 
-                <Input
-                    ref={ibanRef}
-                    returnKeyType="next"
-                    onSubmitEditing={() => onReturn(FIELD_IBAN)}
-                    label={_('iban')}
-                    value={iban}
-                    onChangeText={text => setIban(text)}
-                    params={{ icon: 'bank' }}
-                />
+                    <Input
+                        ref={ibanRef}
+                        returnKeyType="next"
+                        onSubmitEditing={() => onReturn(FIELD_IBAN)}
+                        label={_('iban')}
+                        value={iban}
+                        onChangeText={text => setIban(text)}
+                        params={{ icon: 'bank' }}
+                    />
 
-                <Caption>{_('additionalInfo')}</Caption>
-                <Divider />
-                <VerticalSpace />
+                    <Caption>{_('additionalInfo')}</Caption>
+                    <Divider />
+                    <VerticalSpace />
 
-                <Input
-                    ref={phone2Ref}
-                    keyboardType="phone-pad"
-                    returnKeyType="next"
-                    onSubmitEditing={() => onReturn(FIELD_PHONE2)}
-                    label={`${_('phone2')} (${_('phoneHint')})`}
-                    value={phone2}
-                    onChangeText={text => setPhone2(text)}
-                    params={{ icon: 'phone' }}
-                    dense={true}
-                />
+                    <Input
+                        ref={phone2Ref}
+                        keyboardType="phone-pad"
+                        returnKeyType="next"
+                        onSubmitEditing={() => onReturn(FIELD_PHONE2)}
+                        label={`${_('phone2')} (${_('phoneHint')})`}
+                        value={phone2}
+                        onChangeText={text => setPhone2(text)}
+                        params={{ icon: 'phone' }}
+                        dense={true}
+                    />
 
-                <OperatorMenu ref={op2Ref} dense={true} label={_('sim2')} onItemSelected={setOp2} />
+                    <OperatorMenu ref={op2Ref} dense={true} label={_('sim2')} onItemSelected={setOp2} />
 
-                <Input
-                    ref={bankRef}
-                    returnKeyType="done"
-                    onSubmitEditing={() => onReturn(FIELD_BANK)}
-                    label={_('bank')}
-                    value={bank}
-                    onChangeText={text => setBank(text)}
-                    params={{ icon: 'bank' }}
-                    dense={true}
-                />
+                    <Input
+                        ref={bankRef}
+                        returnKeyType="done"
+                        onSubmitEditing={() => onReturn(FIELD_BANK)}
+                        label={_('bank')}
+                        value={bank}
+                        onChangeText={text => setBank(text)}
+                        params={{ icon: 'bank' }}
+                        dense={true}
+                    />
 
-                <Button onPress={register}> {_('login')} </Button>
-            </ScrollView>
+                    <Button onPress={register}> {_('login')} </Button>
+                </ScrollView>
+            </KeyboardAvoidingView>
         </SafeArea>
     )
 }
