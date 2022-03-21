@@ -19,5 +19,6 @@ const translation = {
         formError: "Some of the fields in the form are invalid, please check the displayed error messages for more details.",
     },
     login: "Login",
+    next: "Next",
 };
 export default translation;

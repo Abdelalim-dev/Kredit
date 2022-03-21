@@ -7,6 +7,7 @@ import { OperatorMenu } from '../components'
 import { Divider, Caption } from 'react-native-paper';
 import * as Linter from '../utils/Lint'
 import { SessionPersistence } from '../services/persistence'
+import { InputAccessoryView } from 'react-native';
 
 const VerticalSpace = styled.View`
     margin-bottom: 16px;
@@ -21,6 +22,13 @@ const Image = styled.Image`
 `
 
 const KeyboardAvoidingView = styled.KeyboardAvoidingView`
+`
+
+const AccessoryContainer = styled.View`
+    flex-direction: row;
+    justify-content: flex-end;
+    padding-top: 4px;
+    background-color: #D1D4D9;
 `
 
 const FIELD_PHONE = "phone"
@@ -43,6 +51,9 @@ export default function Auth() {
     const phone2Ref = React.useRef()
     const op2Ref = React.useRef()
     const bankRef = React.useRef()
+
+    const inputAccessoryViewID = 'uniqueID';
+    const inputAccessoryViewID2 = 'uniqueID2';
 
     const register = () => {
         const isValid = validateForm()
@@ -94,6 +105,17 @@ export default function Auth() {
         }
     }
 
+    const inputAccessoryPhone1 = () => inputAccessoryView(inputAccessoryViewID, () => onReturn(FIELD_PHONE))
+    const inputAccessoryPhone2 = () => inputAccessoryView(inputAccessoryViewID2, () => onReturn(FIELD_PHONE2))
+    const inputAccessoryView = (inputID, onPress) => (
+        Platform.OS == 'android' ? null :
+            <InputAccessoryView nativeID={inputID}>
+                <AccessoryContainer>
+                    <Button mode="text" onPress={onPress}>{_('next')}</Button>
+                </AccessoryContainer>
+            </InputAccessoryView>
+    )
+
     return (
         <SafeArea>
             <KeyboardAvoidingView behavior={Platform.OS == 'ios' ? "position" : "height"}>
@@ -113,6 +135,7 @@ export default function Auth() {
                         value={phone}
                         onChangeText={text => setPhone(text)}
                         params={{ icon: 'phone' }}
+                        inputAccessoryViewID={inputAccessoryViewID}
                     />
 
                     <OperatorMenu ref={opRef} label={_('sim1')} onItemSelected={setOp} />
@@ -141,6 +164,7 @@ export default function Auth() {
                         onChangeText={text => setPhone2(text)}
                         params={{ icon: 'phone' }}
                         dense={true}
+                        inputAccessoryViewID={inputAccessoryViewID2}
                     />
 
                     <OperatorMenu ref={op2Ref} dense={true} label={_('sim2')} onItemSelected={setOp2} />
@@ -159,6 +183,8 @@ export default function Auth() {
                     <Button onPress={register}> {_('login')} </Button>
                 </ScrollView>
             </KeyboardAvoidingView>
+            {inputAccessoryPhone1()}
+            {inputAccessoryPhone2()}
         </SafeArea>
     )
 }
