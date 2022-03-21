@@ -34,7 +34,7 @@ export default function Auth() {
     const [iban, setIban] = useState("");
     const [bank, setBank] = useState("");
 
-    const [errDlgVisible, setErrDlgVisible] = useState(false);
+    const [errMsgVisible, setErrMsgVisible] = useState(false);
     const [accordioExpanded, setExpanded] = useState(false);
 
     React.useEffect(() => {
@@ -61,10 +61,10 @@ export default function Auth() {
     }
 
     const displayErrorDialog = () => {
-        setErrDlgVisible(true)
+        setErrMsgVisible(true)
     }
 
-    const hideErrorDialog = () => setErrDlgVisible(false)
+    const hideErrorDialog = () => setErrMsgVisible(false)
 
     const performLogin = () => {
         let sessionData = {
@@ -93,9 +93,9 @@ export default function Auth() {
         return isValid;
     }
 
-    const renderErrorDialog = () => (
+    const renderErrorMessage = () => (
         <Portal>
-            <Dialog visible={errDlgVisible} onDismiss={hideErrorDialog}>
+            <Dialog visible={errMsgVisible} onDismiss={hideErrorDialog}>
                 <Dialog.Content>
                     <Paragraph>{_('validations.formError')}</Paragraph>
                 </Dialog.Content>
@@ -192,7 +192,7 @@ export default function Auth() {
 
                 <Button onPress={register}> {_('login')} </Button>
 
-                {renderErrorDialog()}
+                {renderErrorMessage()}
             </ScrollView>
         </SafeArea>
     )
