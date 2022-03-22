@@ -1,10 +1,13 @@
 import { View, Text } from 'react-native'
 import React from 'react'
+import { SafeArea } from '../components'
 
 export default function Balance() {
     return (
-        <View>
-            <Text>Balance</Text>
-        </View>
+        <SafeArea>
+            <View>
+                <Text>Balance</Text>
+            </View>
+        </SafeArea>
     )
 }

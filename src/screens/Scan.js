@@ -1,6 +1,7 @@
 import { View, Text, Button } from 'react-native'
 import React, { useContext } from 'react'
 import { SessionContext } from '../../App'
+import { SafeArea } from '../components'
 
 export default function Scan() {
 
@@ -10,9 +11,11 @@ export default function Scan() {
     }
 
     return (
-        <View>
-            <Text>Scan</Text>
-            <Button title="Logout" onPress={logout} />
-        </View>
+        <SafeArea>
+            <View>
+                <Text>Scan</Text>
+                <Button title="Logout" onPress={logout} />
+            </View>
+        </SafeArea>
     )
 }
