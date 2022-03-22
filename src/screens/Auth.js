@@ -72,7 +72,7 @@ export default function Auth() {
             operator2: selectedOp2,
         }
         SessionPersistence.save(sessionData)
-        session.changeSession(true)
+        session.changeSession(sessionData)
     }
 
     const validateForm = () => {

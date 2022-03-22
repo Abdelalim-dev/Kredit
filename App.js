@@ -35,19 +35,27 @@ init()
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(null)
+  const [session, setSession] = useState(null)
 
   useEffect(() => {
     loadSession()
   }, [])
 
   const loadSession = async () => {
-    const session = await SessionPersistence.get()
+    const sessionData = await SessionPersistence.get()
+    setSession(sessionData)
+    setIsLoggedIn(sessionData != null)
+  }
+
+  const updateSession = (session) => {
+    setSession(session)
     setIsLoggedIn(session != null)
   }
 
   const sessionValue = {
     isLoggedIn,
-    changeSession: (isLoggedIn) => setIsLoggedIn(isLoggedIn)
+    session,
+    changeSession: (session) => updateSession(session)
   }
 
   return (

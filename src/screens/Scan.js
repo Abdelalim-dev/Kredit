@@ -2,12 +2,14 @@ import { View, Text, Button } from 'react-native'
 import React, { useContext } from 'react'
 import { SessionContext } from '../../App'
 import { SafeArea } from '../components'
+import { SessionPersistence } from '../services/persistence'
 
 export default function Scan() {
 
-    const session = useContext(SessionContext)
+    const sessionValue = useContext(SessionContext)
     const logout = () => {
-        session.changeSession(false)
+        SessionPersistence.remove()
+        sessionValue.changeSession(null)
     }
 
     return (
