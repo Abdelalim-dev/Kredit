@@ -24,5 +24,10 @@ const translation = {
     purchase: "Purchase",
     balance: "Balance",
     plus: "Plus",
+    screens:{
+        balance: {
+            title: "Check your balance"
+        }
+    }
 };
 export default translation;

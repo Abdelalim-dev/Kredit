@@ -1,12 +1,15 @@
 import React from 'react'
-import { Container, SafeAreaStyled } from './styles'
+import styled from "styled-components";
 
-export default function SafeArea({ children }) {
+const SafeAreaStyled = styled.SafeAreaView`
+    flex: 1;
+`
+
+export default function SafeArea(props) {
+    const { children } = props
     return (
-        <SafeAreaStyled>
-            <Container>
-                {children}
-            </Container>
+        <SafeAreaStyled {...props} >
+            {children}
         </SafeAreaStyled>
     )
 }

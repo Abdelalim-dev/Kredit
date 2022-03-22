@@ -12,10 +12,11 @@ export default function Button(props) {
 
     return (
         <ButtonStyled
+            style={{ borderRadius: 22 }}
             {...props}
             mode={props.mode || "contained"}
             contentStyle={{ height: 44 }}
-            style={{ borderRadius: 22 }}>
+        >
             {props.children}
         </ButtonStyled>
     )
