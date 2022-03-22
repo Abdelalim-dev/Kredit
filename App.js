@@ -15,6 +15,8 @@ import { withTranslation } from 'react-i18next';
 import * as i18n from './src/i18n'
 import * as i18nPersistance from './src/i18n/persistance'
 import theme from './src/theme'
+import { SessionPersistence } from 'src/services/persistence'
+import { Loader } from 'src/components'
 
 export const SessionContext = createContext()
 
@@ -32,9 +34,18 @@ async function init() {
 init()
 
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(null)
 
-  const session = {
+  useEffect(() => {
+    loadSession()
+  }, [])
+
+  const loadSession = async () => {
+    const session = await SessionPersistence.get()
+    setIsLoggedIn(session != null)
+  }
+
+  const sessionValue = {
     isLoggedIn,
     changeSession: (isLoggedIn) => setIsLoggedIn(isLoggedIn)
   }
@@ -42,10 +53,11 @@ const App = () => {
   return (
     <NavigationContainer>
       <PaperProvider theme={theme}>
-        <SessionContext.Provider value={session}>
-          {isLoggedIn ?
-            <Home /> :
-            <Auth />
+        <SessionContext.Provider value={sessionValue}>
+          {isLoggedIn === null ?
+            <Loader /> : isLoggedIn ?
+              < Home /> :
+              <Auth />
           }
         </SessionContext.Provider>
       </PaperProvider>
