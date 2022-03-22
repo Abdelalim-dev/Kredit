@@ -20,5 +20,9 @@ const translation = {
     },
     login: "Login",
     next: "Next",
+    scan: "Scan",
+    purchase: "Purchase",
+    balance: "Balance",
+    plus: "Plus",
 };
 export default translation;

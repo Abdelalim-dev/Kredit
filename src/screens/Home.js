@@ -1,14 +1,30 @@
 import React from 'react'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Scan, Purchase, Balance } from './'
+import { BottomNavigation } from 'react-native-paper';
 
-const Tab = createBottomTabNavigator();
 export default function Home() {
+
+    const [index, setIndex] = React.useState(0)
+    
+    const [routes] = React.useState([
+        { key: "scan", title: _('scan'), icon: 'line-scan' },
+        { key: "balance", title: _('balance'), icon: 'wallet-outline' },
+        { key: "purchase", title: _('purchase'), icon: 'currency-usd' },
+        { key: "plus", title: _('plus'), icon: 'dots-horizontal' },
+    ])
+
+    const renderScene = BottomNavigation.SceneMap({
+        scan: Scan,
+        purchase: Purchase,
+        balance: Balance,
+        plus: Scan, // TODO: Create a component for this
+    })
+
     return (
-        <Tab.Navigator>
-            <Tab.Screen name="Scan" component={Scan} />
-            <Tab.Screen name="Purchase" component={Purchase} />
-            <Tab.Screen name="Balance" component={Balance} />
-        </Tab.Navigator>
+            <BottomNavigation
+                navigationState={{ index, routes }}
+                onIndexChange={setIndex}
+                renderScene={renderScene}
+            />
     )
 }
