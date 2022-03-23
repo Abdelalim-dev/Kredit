@@ -20,14 +20,19 @@ const translation = {
     },
     login: "Login",
     next: "Next",
+    done: "Done",
     scan: "Scan",
     purchase: "Purchase",
     balance: "Balance",
-    plus: "Plus",
+    more: "More",
     screens:{
         balance: {
             title: "Check your balance",
             noSim: "No SIM",
+        },
+        purchase: {
+            amountLabel: "Amount to purchase",
+            purchase: "Purchase",
         }
     }
 };

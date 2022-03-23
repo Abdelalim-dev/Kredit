@@ -10,14 +10,14 @@ export default function Home() {
         { key: "scan", title: _('scan'), icon: 'line-scan' },
         { key: "balance", title: _('balance'), icon: 'wallet-outline' },
         { key: "purchase", title: _('purchase'), icon: 'currency-usd' },
-        { key: "plus", title: _('plus'), icon: 'dots-horizontal' },
+        { key: "more", title: _('more'), icon: 'dots-horizontal' },
     ])
 
     const renderScene = BottomNavigation.SceneMap({
         scan: Scan,
         purchase: Purchase,
         balance: Balance,
-        plus: Scan, // TODO: Create a component for this
+        more: Scan, // TODO: Create a component for this
     })
 
     return (
