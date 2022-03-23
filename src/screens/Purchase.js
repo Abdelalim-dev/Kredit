@@ -3,16 +3,21 @@ import { InputAccessoryView } from 'react-native';
 import styled from 'styled-components'
 import { Input, Button, OperatorMenu } from '../components'
 
+import bannerImage from '../assets/images/undraw_purchase.png'
+
 const SafeArea = styled.SafeAreaView`
     flex:1;
+    background-color: #FFF;
+    justify-content: center;
 `
 
 const VerticalSpace = styled.View`
     margin-bottom: 16px;
 `
 
-const Image = styled.Image`
-    align-self: center;
+const Banner = styled.Image`
+    height:50%;
+    width:auto;
 `
 
 const KeyboardAvoidingView = styled.KeyboardAvoidingView`
@@ -61,11 +66,10 @@ export default function Purchase() {
 
     return (
         <SafeArea>
+            <Banner source={bannerImage} />
+            <VerticalSpace />
             <KeyboardAvoidingView style={{ marginHorizontal: 16 }} behavior={Platform.OS == 'ios' ? "position" : "height"}>
 
-                {/* TODO: Add some animation here... */}
-                <Image source={require('../assets/images/logo.png')} />
-                <VerticalSpace />
 
                 <Input
                     ref={amountRef}
