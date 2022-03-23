@@ -11,7 +11,7 @@ export default {
 
     retrieveData: async function (key) {
         try {
-            return await EncryptedStorage.getItem(key);
+            return await EncryptedStorage.getItem(key) || null;
         } catch (error) {
             console.log(error.code);
             return null
