@@ -8,19 +8,19 @@ import bannerImage from '../assets/images/undraw_purchase.png'
 const SafeArea = styled.SafeAreaView`
     flex:1;
     background-color: #FFF;
-    justify-content: center;
 `
 
-const VerticalSpace = styled.View`
-    margin-bottom: 16px;
+const ScrollView = styled.ScrollView`
+`
+
+const KeyboardAvoidingView = styled.KeyboardAvoidingView`
+    margin-horizontal: 16px;
 `
 
 const Banner = styled.Image`
     height:50%;
     width:auto;
-`
-
-const KeyboardAvoidingView = styled.KeyboardAvoidingView`
+    margin-horizontal:-16px;
 `
 
 const AccessoryContainer = styled.View`
@@ -66,26 +66,28 @@ export default function Purchase() {
 
     return (
         <SafeArea>
-            <Banner source={bannerImage} />
-            <VerticalSpace />
-            <KeyboardAvoidingView style={{ marginHorizontal: 16 }} behavior={Platform.OS == 'ios' ? "position" : "height"}>
+            <KeyboardAvoidingView style={{ flex: 1 }} behavior="height">
+                <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
 
+                    <Banner resizeMode="cover" source={bannerImage} />
 
-                <Input
-                    ref={amountRef}
-                    keyboardType="number-pad"
-                    label={`${_('screens.purchase.amountLabel')}`}
-                    value={amount}
-                    onChangeText={text => setAmount(text)}
-                    params={{ icon: 'currency-usd' }}
-                    inputAccessoryViewID={inputAccessoryViewID}
-                />
+                    <Input
+                        ref={amountRef}
+                        keyboardType="number-pad"
+                        label={`${_('screens.purchase.amountLabel')}`}
+                        value={amount}
+                        onChangeText={text => setAmount(text)}
+                        params={{ icon: 'currency-usd' }}
+                        inputAccessoryViewID={inputAccessoryViewID}
+                    />
 
-                <OperatorMenu ref={opRef} label={_('sim1')} onItemSelected={setOperator} />
+                    <OperatorMenu ref={opRef} label={_('sim1')} onItemSelected={setOperator} />
 
-                <Button onPress={purchase}> {_('purchase')} </Button>
+                    <Button mode="outlined" onPress={purchase}> {_('purchase')} </Button>
+                </ScrollView>
             </KeyboardAvoidingView>
+
             {inputAccessoryAmount()}
-        </SafeArea>
+        </SafeArea >
     )
 }
