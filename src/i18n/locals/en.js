@@ -26,7 +26,8 @@ const translation = {
     plus: "Plus",
     screens:{
         balance: {
-            title: "Check your balance"
+            title: "Check your balance",
+            noSim: "No SIM",
         }
     }
 };
