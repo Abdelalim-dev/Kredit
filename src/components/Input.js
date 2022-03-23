@@ -18,9 +18,10 @@ function Input(props, ref) {
 
     const inputRef = React.useRef()
 
-    React.useImperativeHandle(ref, () => ({ isValid, handleTextChange, focus }));
+    React.useImperativeHandle(ref, () => ({ isValid, handleTextChange, focus, blur }));
 
     const focus = () => inputRef.current.focus()
+    const blur = () => inputRef.current.blur()
 
     const handleTextChange = (text) => {
         const { onChangeText } = props;
