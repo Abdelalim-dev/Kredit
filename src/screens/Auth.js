@@ -122,7 +122,7 @@ export default function Auth() {
 
     return (
         <SafeArea>
-            <KeyboardAvoidingView behavior={Platform.OS == 'ios' ? "position" : "height"}>
+            <KeyboardAvoidingView style={{ marginHorizontal: 16 }} behavior={Platform.OS == 'ios' ? "position" : "height"}>
                 <ScrollView keyboardShouldPersistTaps="handled">
 
                     <Image source={require('../assets/images/logo.png')} />
@@ -154,9 +154,9 @@ export default function Auth() {
                         params={{ icon: 'bank' }}
                     />
 
-                    <Caption>{_('additionalInfo')}</Caption>
                     <Divider />
                     <VerticalSpace />
+                    <Caption>{_('additionalInfo')}</Caption>
 
                     <Input
                         ref={phone2Ref}
