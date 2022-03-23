@@ -16,6 +16,7 @@ const translation = {
         required_if: "Required field with :attribute",
         phone: "Invalid phone number",
         iban: "Invalid bank account number",
+        charge_amount: "Pleasse fill in the amount",
         formError: "Some of the fields in the form are invalid, please check the displayed error messages for more details.",
     },
     login: "Login",

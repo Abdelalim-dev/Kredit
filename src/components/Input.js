@@ -30,7 +30,7 @@ function Input(props, ref) {
     }
 
     const isValid = (validations) => {
-        const { OPTIONAL, REQUIRED, REQUIRED_IF, PHONE, IBAN } = Linter
+        const { OPTIONAL, REQUIRED, REQUIRED_IF, PHONE, IBAN, CHARGE_AMOUNT } = Linter
         const { value } = props
 
         if (validations[REQUIRED] && !Linter.required(value)) {
@@ -47,7 +47,11 @@ function Input(props, ref) {
 
         const isOptional = !!validations[OPTIONAL]
 
-        if (validations[PHONE] && !Linter.phone(value, isOptional)) {
+        if (validations[CHARGE_AMOUNT] && !Linter.positive(value)) {
+            setErrorMessage(_(`validations.${CHARGE_AMOUNT}`))
+            return false
+
+        } else if (validations[PHONE] && !Linter.phone(value, isOptional)) {
             setErrorMessage(_(`validations.${PHONE}`))
             return false
 

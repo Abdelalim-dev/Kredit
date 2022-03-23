@@ -3,6 +3,7 @@ import { InputAccessoryView } from 'react-native';
 import styled from 'styled-components'
 import { Input, Button, OperatorMenu } from '../components'
 import { Headline as H } from 'react-native-paper'
+import * as Linter from '../utils/Lint'
 
 import bannerImage from '../assets/images/undraw_purchase.png'
 
@@ -46,16 +47,29 @@ const FIELD_AMOUNT = "amount"
 
 export default function Purchase() {
 
-    const [amount, setAmount] = useState("0");
+    const [amount, setAmount] = useState("");
     const [operator, setOperator] = useState("");
 
     const amountRef = useRef()
-    const opRef = useRef() // TODO: Remove if not used
+    const opRef = useRef()
 
     const inputAccessoryViewID = 'someUniqueID';
 
     const purchase = () => {
-        // TODO:
+        const isValid = validateForm()
+        if (!isValid) return
+
+        performPurchase()
+    }
+
+    const validateForm = () => {
+        let isValid = amountRef.current.isValid(Linter.chargeAmountValidation())
+        isValid = opRef.current.isValid(Linter.requiredValidation()) && isValid
+        return isValid;
+    }
+
+    const performPurchase = () => {
+        console.warn('Purchase operation')
     }
 
     const onReturn = (field) => {
