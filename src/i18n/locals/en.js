@@ -31,6 +31,7 @@ const translation = {
             noSim: "No SIM",
         },
         purchase: {
+            title: "Charge your account",
             amountLabel: "Amount to purchase",
             purchase: "Purchase",
         }

@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react'
 import { InputAccessoryView } from 'react-native';
 import styled from 'styled-components'
 import { Input, Button, OperatorMenu } from '../components'
+import { Headline as H } from 'react-native-paper'
 
 import bannerImage from '../assets/images/undraw_purchase.png'
 
@@ -14,12 +15,14 @@ const ScrollView = styled.ScrollView`
 `
 
 const KeyboardAvoidingView = styled.KeyboardAvoidingView`
+    padding-top: 16px;
     margin-horizontal: 16px;
 `
 
 const Banner = styled.Image`
-    height:50%;
-    width:auto;
+    min-height:300px;
+    height:auto;
+    width:100%;
     margin-horizontal:-16px;
 `
 
@@ -30,11 +33,20 @@ const AccessoryContainer = styled.View`
     background-color: #D1D4D9;
 `
 
+const Headline = styled(H)`
+    text-align: center;
+`
+
+const ButtonStyled = styled(Button)`
+    margin-top: 32px;
+    margin-bottom: 16px;
+`
+
 const FIELD_AMOUNT = "amount"
 
 export default function Purchase() {
 
-    const [amount, setAmount] = useState(0);
+    const [amount, setAmount] = useState("0");
     const [operator, setOperator] = useState("");
 
     const amountRef = useRef()
@@ -66,9 +78,9 @@ export default function Purchase() {
 
     return (
         <SafeArea>
-            <KeyboardAvoidingView style={{ flex: 1 }} behavior="height">
-                <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-
+            <KeyboardAvoidingView behavior="height">
+                <Headline>{_('screens.purchase.title')}</Headline>
+                <ScrollView >
                     <Banner resizeMode="cover" source={bannerImage} />
 
                     <Input
@@ -77,13 +89,13 @@ export default function Purchase() {
                         label={`${_('screens.purchase.amountLabel')}`}
                         value={amount}
                         onChangeText={text => setAmount(text)}
-                        params={{ icon: 'currency-usd' }}
+                        params={{ icon: 'currency-ngn' }}
                         inputAccessoryViewID={inputAccessoryViewID}
                     />
 
                     <OperatorMenu ref={opRef} label={_('sim1')} onItemSelected={setOperator} />
 
-                    <Button mode="outlined" onPress={purchase}> {_('purchase')} </Button>
+                    <ButtonStyled mode="outlined" onPress={purchase}> {_('purchase')} </ButtonStyled>
                 </ScrollView>
             </KeyboardAvoidingView>
 
