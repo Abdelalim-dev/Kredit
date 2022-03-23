@@ -14,4 +14,4 @@ export const purchaseUSSD = {
     "Glo": "123",
 }
 
-export const purchaseFormula = "*_code_*_voucher_#"
+export const purchaseFormula = "*_ussd_*_voucher_code_#"
