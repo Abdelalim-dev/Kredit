@@ -9,7 +9,7 @@ export default function Home() {
     const [routes] = React.useState([
         { key: "scan", title: _('scan'), icon: 'line-scan' },
         { key: "balance", title: _('balance'), icon: 'wallet-outline' },
-        { key: "purchase", title: _('purchase'), icon: 'currency-usd' },
+        { key: "purchase", title: _('purchase'), icon: 'plus-circle-outline' },
         { key: "more", title: _('more'), icon: 'dots-horizontal' },
     ])
 
@@ -25,6 +25,7 @@ export default function Home() {
                 navigationState={{ index, routes }}
                 onIndexChange={setIndex}
                 renderScene={renderScene}
+                sceneAnimationEnabled={true}
             />
     )
 }
