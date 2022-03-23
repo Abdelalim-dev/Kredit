@@ -1,8 +1,12 @@
-import { View, Text, Button } from 'react-native'
 import React, { useContext } from 'react'
+import { View, Text, Button } from 'react-native'
+import styled from 'styled-components'
 import { SessionContext } from '../../App'
-import { SafeArea } from '../components'
 import { SessionPersistence } from '../services/persistence'
+
+const SafeArea = styled.SafeAreaView`
+    flex:1;
+`
 
 export default function Scan() {
 

@@ -1,6 +1,10 @@
-import { View, Text } from 'react-native'
 import React from 'react'
-import { SafeArea } from '../components'
+import { View, Text } from 'react-native'
+import styled from 'styled-components'
+
+const SafeArea = styled.SafeAreaView`
+    flex:1;
+`
 
 export default function Purchase() {
     return (

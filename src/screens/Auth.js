@@ -1,13 +1,17 @@
 import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
 import { SessionContext } from '../../App'
-import { Input, SafeArea, Button } from '../components'
+import { Input, Button } from '../components'
 import { ScrollView } from '../components/styles'
 import { OperatorMenu } from '../components'
 import { Divider, Caption } from 'react-native-paper';
 import * as Linter from '../utils/Lint'
 import { SessionPersistence } from '../services/persistence'
 import { InputAccessoryView } from 'react-native';
+
+const SafeArea = styled.SafeAreaView`
+    flex:1;
+`
 
 const VerticalSpace = styled.View`
     margin-bottom: 16px;
