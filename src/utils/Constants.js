@@ -15,3 +15,8 @@ export const purchaseUSSD = {
 }
 
 export const purchaseFormula = "*_ussd_*_voucher_code_#"
+
+export const ROUTES = {
+    PURCHASE: "Purchase",
+    SCAN: "Scan",
+}
