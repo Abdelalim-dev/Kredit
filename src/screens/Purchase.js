@@ -69,7 +69,7 @@ export default function Purchase() {
     }
 
     const performPurchase = () => {
-        console.warn('Purchase operation')
+        alert('Should start the purchase')
     }
 
     const onReturn = (field) => {
