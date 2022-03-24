@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react'
 import { InputAccessoryView } from 'react-native';
 import styled from 'styled-components'
 import { Input, Button, OperatorMenu } from '../components'
-import { Headline as H } from 'react-native-paper'
+import { Headline as H, FAB as FloatingButton } from 'react-native-paper'
 import * as Linter from '../utils/Lint'
 
 import bannerImage from '../assets/images/undraw_purchase.png'
@@ -43,6 +43,13 @@ const ButtonStyled = styled(Button)`
     margin-bottom: 16px;
 `
 
+const FAB = styled(FloatingButton)`
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 16px;
+`
+
 const FIELD_AMOUNT = "amount"
 
 export default function Purchase() {
@@ -80,6 +87,10 @@ export default function Purchase() {
         }
     }
 
+    const openScan = () => {
+        alert('Open Scan screen')
+    }
+
     const inputAccessoryAmount = () => inputAccessoryView(inputAccessoryViewID, () => onReturn(FIELD_AMOUNT))
     const inputAccessoryView = (inputID, onPress) => (
         Platform.OS == 'android' ? null :
@@ -89,6 +100,8 @@ export default function Purchase() {
                 </AccessoryContainer>
             </InputAccessoryView>
     )
+
+    const renderFAB = () => <FAB icon="line-scan" onPress={() => openScan()} />
 
     return (
         <SafeArea>
@@ -112,7 +125,7 @@ export default function Purchase() {
                     <ButtonStyled mode="outlined" onPress={purchase}> {_('purchase')} </ButtonStyled>
                 </ScrollView>
             </KeyboardAvoidingView>
-
+            {renderFAB()}
             {inputAccessoryAmount()}
         </SafeArea >
     )

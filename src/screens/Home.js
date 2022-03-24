@@ -7,14 +7,14 @@ export default function Home() {
     const [index, setIndex] = React.useState(0)
     
     const [routes] = React.useState([
-        { key: "scan", title: _('scan'), icon: 'line-scan' },
-        { key: "balance", title: _('balance'), icon: 'wallet-outline' },
+        // { key: "scan", title: _('scan'), icon: 'line-scan' },
         { key: "purchase", title: _('purchase'), icon: 'plus-circle-outline' },
+        { key: "balance", title: _('balance'), icon: 'wallet-outline' },
         { key: "more", title: _('more'), icon: 'dots-horizontal' },
     ])
 
     const renderScene = BottomNavigation.SceneMap({
-        scan: Scan,
+        // scan: Scan,
         purchase: Purchase,
         balance: Balance,
         more: More,
@@ -22,6 +22,7 @@ export default function Home() {
 
     return (
             <BottomNavigation
+                shifting
                 navigationState={{ index, routes }}
                 onIndexChange={setIndex}
                 renderScene={renderScene}
