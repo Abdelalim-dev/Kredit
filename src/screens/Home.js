@@ -1,5 +1,5 @@
 import React from 'react'
-import { Scan, Purchase, Balance, More } from './'
+import { Purchase, Balance, More } from './'
 import { BottomNavigation } from 'react-native-paper';
 
 export default function Home() {
@@ -7,14 +7,12 @@ export default function Home() {
     const [index, setIndex] = React.useState(0)
     
     const [routes] = React.useState([
-        // { key: "scan", title: _('scan'), icon: 'line-scan' },
         { key: "purchase", title: _('purchase'), icon: 'plus-circle-outline' },
         { key: "balance", title: _('balance'), icon: 'wallet-outline' },
         { key: "more", title: _('more'), icon: 'dots-horizontal' },
     ])
 
     const renderScene = BottomNavigation.SceneMap({
-        // scan: Scan,
         purchase: Purchase,
         balance: Balance,
         more: More,
