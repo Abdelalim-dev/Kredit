@@ -36,6 +36,13 @@ const translation = {
             amountLabel: "Amount to purchase",
             purchase: "Purchase",
         },
+        scan: {
+            title: "Place the camera over the voucher",
+            cameraPermissionTitle: "Permission to use camera",
+            cameraPermission: "We need camera permission to be able to scan the voucher",
+            codeDetected: "Voucher code detected!",
+            tryAgain: "Try again",
+        },
         more: {
             phone: "Main phone number",
             phone2: "Secondary phone number",
@@ -44,6 +51,9 @@ const translation = {
     },
     misc: {
         none: 'None',
+        ok: 'Ok',
+        cancel: 'Cancel',
+        confirm: 'Confirm',
     }
 };
 export default translation;

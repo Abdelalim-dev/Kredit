@@ -54,7 +54,7 @@
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Kredit needs camera permission to scan the voucher</string>
+	<string>We need camera permission to be able to scan the voucher</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>

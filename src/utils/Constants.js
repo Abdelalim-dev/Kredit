@@ -14,7 +14,9 @@ export const purchaseUSSD = {
     "Glo": "123",
 }
 
-export const purchaseFormula = "*_ussd_*_voucher_code_#"
+export const purchaseFormula =(ussd, voucherCode)=>{
+    return `*${ussd}*${voucherCode}#`
+}
 
 export const ROUTES = {
     PURCHASE: "Purchase",
