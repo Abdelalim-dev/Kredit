@@ -35,7 +35,15 @@ const translation = {
             title: "Charge your account",
             amountLabel: "Amount to purchase",
             purchase: "Purchase",
+        },
+        more: {
+            phone: "Main phone number",
+            phone2: "Secondary phone number",
+            iban: "Bank account number",
         }
+    },
+    misc: {
+        none: 'None',
     }
 };
 export default translation;

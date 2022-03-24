@@ -1,5 +1,5 @@
 import React from 'react'
-import { Scan, Purchase, Balance } from './'
+import { Scan, Purchase, Balance, More } from './'
 import { BottomNavigation } from 'react-native-paper';
 
 export default function Home() {
@@ -17,7 +17,7 @@ export default function Home() {
         scan: Scan,
         purchase: Purchase,
         balance: Balance,
-        more: Scan, // TODO: Create a component for this
+        more: More,
     })
 
     return (

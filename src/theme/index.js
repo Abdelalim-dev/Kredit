@@ -10,3 +10,7 @@ export default theme = {
     },
 };
 
+const themeDanger = JSON.parse(JSON.stringify(theme))
+themeDanger.colors.primary = theme.colors.accent
+export const ThemeDanger = themeDanger
+
