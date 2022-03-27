@@ -7,8 +7,6 @@ import { StatusBar, Dimensions, Text, View, Alert, Linking } from 'react-native'
 import { cameraPermissionOptions } from './config'
 import { purchaseFormula } from 'src/utils/Constants'
 
-import icnTorch from 'src/assets/images/ic_highlight.png'
-
 
 
 
@@ -96,7 +94,7 @@ export default function Scan({ navigation, route }) {
 
     const TorchSection = () => <TorchContainer>
         <TorchButton flashOn={flashOn} onPress={() => setFlashOn(!flashOn)} >
-            <TorchIcon source={icnTorch} />
+            <TorchIcon icon={`lightbulb-${flashOn ? 'on' : 'off'}`} size={64} />
         </TorchButton>
     </TorchContainer>
 

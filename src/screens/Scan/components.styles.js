@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Headline } from 'react-native-paper'
+import { Headline, IconButton } from 'react-native-paper'
 
 
 export const SafeArea = styled.SafeAreaView`
@@ -33,7 +33,7 @@ export const TorchButton = styled.TouchableOpacity`
     border-radius: ${({ flashOn }) => flashOn ? '40px' : 0};
 `
 
-export const TorchIcon = styled.Image`
+export const TorchIcon = styled(IconButton)`
     width: 64px;
     height: 64px;
 `
