@@ -23,7 +23,7 @@ const translation = {
     next: "Next",
     done: "Done",
     scan: "Scan",
-    purchase: "Purchase",
+    purchase: "Top up",
     balance: "Balance",
     more: "More",
     screens:{
