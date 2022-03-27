@@ -18,6 +18,7 @@ export default function Scan({ navigation, route }) {
     const cameraRef = React.useRef()
     const textDetected = React.useRef(false)
     const wrongCodes = React.useRef({})
+    const [suggestions, setSuggestions] = React.useState([])
 
     const [flashOn, setFlashOn] = React.useState(false)
 
@@ -43,10 +44,15 @@ export default function Scan({ navigation, route }) {
                 return;
             }
 
-            cameraRef.current.pausePreview()
+            const newSuggestions = [...suggestions]
+            
+            if (!newSuggestions.includes(voucherCode)) newSuggestions.push(voucherCode)
+            
+            if (newSuggestions.length != suggestions.length) setSuggestions(newSuggestions)
 
-            showVoucherCodeAlert(voucherCode,
-                () => callSerial(voucherCode), () => tryAgain(voucherCode))
+            // cameraRef.current.pausePreview()
+            // showVoucherCodeAlert(voucherCode,
+            //     () => callSerial(voucherCode), () => tryAgain(voucherCode))
         }
     }
 
