@@ -1,27 +1,36 @@
 import styled from 'styled-components'
-import { Headline, IconButton } from 'react-native-paper'
+import { Title as T, IconButton, Card, Subheading, Caption } from 'react-native-paper'
 
 
 export const SafeArea = styled.SafeAreaView`
     flex:1;
 `
 
-export const TitleContainer = styled.View`
+export const TopContainer = styled.View`
     flex: 1;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
-    background-color: gray;
+    background-color: #FFF;
+`
+
+export const Logo = styled.Image`
+    width: 128px;
+    height: 128px;
+`
+
+export const Title = styled(T)`
 `
 
 export const CameraPreview = styled.View`
     flex: 1;
 `
 
-export const TorchContainer = styled.View`
+export const BottomContainer = styled.View`
     flex: 2;
     justify-content: center;
-    align-items: center;
-    background-color: gray;
+    background-color: #fafafa;
+    padding-left: 16px;
+    padding-right: 16px;
 `
 
 export const TorchButton = styled.TouchableOpacity`
@@ -38,5 +47,28 @@ export const TorchIcon = styled(IconButton)`
     height: 64px;
 `
 
-export const Title = styled(Headline)`
+export const ScrollView = styled.ScrollView`
+`
+
+export const SectionTitle = styled(Subheading)`
+    margin-top: 16px;
+`
+
+export const Description = styled(Caption)`
+`
+
+export const ResetDescription = styled(Caption)`
+    text-align: center;
+    margin-top: 16px;
+`
+
+export const ItemStyled = styled(Card)`
+    margin-top: 4px;
+    // Against clipping card shadow by parent view
+    margin-left:1px; 
+    margin-right:1px; 
+`
+
+export const ItemTitleStyled = styled(Card.Title)`
+    font-size: 4px;
 `

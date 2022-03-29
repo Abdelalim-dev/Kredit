@@ -42,6 +42,10 @@ const translation = {
             cameraPermission: "We need camera permission to be able to scan the voucher",
             codeDetected: "Voucher code detected!",
             tryAgain: "Try again",
+            suggestionsTitle: "Suggestions",
+            description: "If you don't see your code please consider removing some suggestions. Others will showup",
+            noSuggestions: "If this is taking long, please reset the scan",
+            reset: "Reset",
         },
         more: {
             phone: "Main phone number",

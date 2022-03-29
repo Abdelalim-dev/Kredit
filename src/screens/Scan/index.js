@@ -1,11 +1,16 @@
 // Scan
 import React from 'react'
+import { Dimensions, Linking } from 'react-native';
 import { RNCamera } from 'react-native-camera';
-import { SafeArea, TorchContainer, TorchButton, TorchIcon } from './components.styles'
-import { TitleContainer, Title, CameraPreview } from './components.styles'
-import { StatusBar, Dimensions, Text, View, Alert, Linking } from 'react-native';
+import {
+    SafeArea, BottomContainer, ScrollView, SectionTitle,
+    Description, ResetDescription, ItemStyled, ItemTitleStyled,
+    TopContainer, Title, CameraPreview, Logo
+} from './components.styles'
+
+import { Button } from 'src/components'
+import { IconButton } from 'react-native-paper';
 import { cameraPermissionOptions } from './config'
-import { purchaseFormula } from 'src/utils/Constants'
 
 
 
@@ -16,7 +21,6 @@ const LIMIT_BOTTOM = LIMIT_TOP + 80;
 
 export default function Scan({ navigation, route }) {
     const cameraRef = React.useRef()
-    const textDetected = React.useRef(false)
     const wrongCodes = React.useRef({})
     const [suggestions, setSuggestions] = React.useState([])
 
@@ -26,83 +30,79 @@ export default function Scan({ navigation, route }) {
         if (textBlocks.length > 0) {
 
             textBlocks.forEach(block => {
-                if (block.bounds.origin.y > LIMIT_TOP && block.bounds.origin.y < LIMIT_BOTTOM) {
+                // To limit the scan area
+                // Only from the preview section instead of the whole screen
+                if (block.bounds.origin.y > LIMIT_TOP &&
+                    block.bounds.origin.y < LIMIT_BOTTOM)
                     handleScan(block.value)
-                }
             })
         }
     }
 
     const handleScan = (text) => {
 
-        if (!textDetected.current) {
-            textDetected.current = true;
-            let voucherCode = getSerialNumber(text)
+        let voucherCode = getSerialNumber(text)
 
-            if (!voucherCode || wrongCodes.current[voucherCode]) {
-                textDetected.current = false;
-                return;
-            }
+        if (!voucherCode || wrongCodes.current[voucherCode]) return;
 
-            const newSuggestions = [...suggestions]
-            
-            if (!newSuggestions.includes(voucherCode)) newSuggestions.push(voucherCode)
-            
-            if (newSuggestions.length != suggestions.length) setSuggestions(newSuggestions)
+        const newSuggestions = [...suggestions]
 
-            // cameraRef.current.pausePreview()
-            // showVoucherCodeAlert(voucherCode,
-            //     () => callSerial(voucherCode), () => tryAgain(voucherCode))
-        }
-    }
+        if (!newSuggestions.includes(voucherCode)) newSuggestions.push(voucherCode)
 
-    const showVoucherCodeAlert = (voucherCode, onSuccess, onFailure) => {
-        Alert.alert(_('screens.scan.codeDetected'), voucherCode,
-            [
-                {
-                    text: _('screens.scan.tryAgain'),
-                    onPress: onFailure,
-                    style: "cancel"
-                },
-                { text: _('misc.confirm'), onPress: onSuccess }
-            ],
-            { cancelable: false }
-        )
-    }
-
-    const tryAgain = (wrongVoucherCode) => {
-        wrongCodes.current[wrongVoucherCode] = true
-
-        textDetected.current = false;
-        cameraRef.current.resumePreview()
+        if (newSuggestions.length != suggestions.length) setSuggestions(newSuggestions)
     }
 
     const getSerialNumber = (text) => {
-        if (text.length > 10) {
-            let serial = text.replace(/[^0-9]/g, '')
-            if (serial.length >= 15 && serial.length <= 18) return serial;
+
+        if (text.length < 10) return false
+
+        let serial = text.replace(/[^0-9]/g, '')
+
+        if (serial.length >= 15 && serial.length <= 18) return serial;
+    }
+
+    const CardItem = ({ index, number }) => {
+
+        // TODO: Use context to get the USSD code
+        // ...
+        const USSDFromContext = 123
+
+        const dialNumber = (voucherCode = 0, USSD) => Linking.openURL(`tel:*${USSD}*${voucherCode}#`)
+
+        const removeFromSuggestions = (index, voucherCode) => {
+            setSuggestions([...suggestions.slice(0, index), ...suggestions.slice(index + 1)])
+            wrongCodes.current[voucherCode] = true
         }
-        return false;
+
+        return <ItemStyled onPress={() => dialNumber(number, USSDFromContext)}>
+            <ItemTitleStyled title={number.toString()}
+                right={() => <IconButton icon="close" onPress={() => removeFromSuggestions(index, number)} />}
+            />
+        </ItemStyled>
     }
 
-    const callSerial = async (voucherCode) => {
-        console.warn('callSerial', voucherCode)
-        // TODO: Get the selected phone from route params
-        // const ussd = purchaseFormula(ussd, voucherCode)
-        Linking.openURL(`tel:${voucherCode}`)
-        navigation.goBack()
+    const ShimmerSuggestionsView = () => <>
+        <ResetDescription>THE SHIMMER VIEW WILL BE HERE</ResetDescription>
+        <ResetDescription>{_('screens.scan.noSuggestions')}</ResetDescription>
+        <Button mode="text" onPress={onReset}>{_('reset')}</Button>
+    </>
+
+    const onReset = () => {
+        setSuggestions([])
+        wrongCodes.current = {}
     }
 
-    const TitleSection = () => <TitleContainer>
-        <Title>{_('screens.scan.title')}</Title>
+    const SuggestionItems = () =>
+        suggestions.map((value, index) => <CardItem key={index} index={index} number={value} />)
 
-    </TitleContainer>
-
-    const TorchSection = () => <TorchContainer>
-        <TorchButton flashOn={flashOn} onPress={() => setFlashOn(!flashOn)} >
-            <TorchIcon icon={`lightbulb-${flashOn ? 'on' : 'off'}`} size={64} />
-        </TorchButton>
-    </TorchContainer>
+    const Suggestions = () => (
+        !suggestions.length ? <ShimmerSuggestionsView /> :
+            <ScrollView contentContainerStyle={{ paddingBottom: 8 }}>
+                <SectionTitle>{_('screens.scan.suggestionsTitle')}</SectionTitle>
+                <Description>{_('screens.scan.description')}</Description>
+                <SuggestionItems />
+            </ScrollView>
+    )
 
     return (
         <SafeArea>
@@ -115,12 +115,17 @@ export default function Scan({ navigation, route }) {
                 androidCameraPermissionOptions={cameraPermissionOptions}
                 onTextRecognized={textRecognized}
             >
-                <TitleSection />
+                <TopContainer>
+                    <Logo source={require('src/assets/images/logo.png')}></Logo>
+                    <Title>{_('screens.scan.title')}</Title>
+                </TopContainer>
 
                 <CameraPreview />
 
-                <TorchSection />
+                <BottomContainer>
+                    <Suggestions />
+                </BottomContainer>
             </RNCamera>
-        </SafeArea>
+        </SafeArea >
     )
 }
