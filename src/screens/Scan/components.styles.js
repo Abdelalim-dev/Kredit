@@ -57,6 +57,16 @@ export const SectionTitle = styled(Subheading)`
 export const Description = styled(Caption)`
 `
 
+export const PreviewBadge = styled(Description)`
+    background-color: #FFF;
+    border-radius: 4px;
+    color: #000;
+    padding-horizontal: 3px;
+    margin-left: 1px;
+    align-self: flex-start;
+    opacity: 0.6;
+`
+
 export const ResetDescription = styled(Caption)`
     text-align: center;
     margin-top: 16px;

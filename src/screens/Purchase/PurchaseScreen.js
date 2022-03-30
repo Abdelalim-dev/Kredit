@@ -1,11 +1,11 @@
 import React, { useState, useRef } from 'react'
 import { InputAccessoryView } from 'react-native';
-
+import { SessionContext } from '../../../App'
 import { Input, Button, OperatorMenu } from '../../components'
 import * as Linter from '../../utils/Lint'
 import {
     SafeArea, ScrollView, KeyboardAvoidingView, Banner, AccessoryContainer,
-    Headline, ActionButton, FAB,
+    Headline, ActionButton, Portal, FAB,
 } from './components.styles'
 import { ROUTES } from '../../utils/Constants'
 
@@ -16,8 +16,12 @@ const FIELD_AMOUNT = "amount"
 
 export default function PurchaseScreen({ navigation }) {
 
+    const { session } = React.useContext(SessionContext)
+
     const [amount, setAmount] = useState("");
     const [operator, setOperator] = useState("");
+
+    const [fabOpen, setFabOpen] = useState({ open: false });
 
     const amountRef = useRef()
     const opRef = useRef()
@@ -49,8 +53,8 @@ export default function PurchaseScreen({ navigation }) {
         }
     }
 
-    const openScan = () => {
-        navigation.push(ROUTES.SCAN)
+    const openScan = (operator) => {
+        navigation.push(ROUTES.SCAN, { operator })
     }
 
     const inputAccessoryAmount = () => inputAccessoryView(inputAccessoryViewID, () => onReturn(FIELD_AMOUNT))
@@ -63,7 +67,25 @@ export default function PurchaseScreen({ navigation }) {
             </InputAccessoryView>
     )
 
-    const renderFAB = () => <FAB icon="line-scan" onPress={() => openScan()} />
+    const renderFAB = () => {
+        const { operator, operator2 } = session
+
+        return (operator2 && operator2 != operator) ? <FABGroup /> : <FABButton />
+    }
+
+    const FABButton = () => <FAB icon="line-scan" onPress={() => openScan(session.operator)} />
+
+    const FABGroup = () => {
+        return <FAB.Group
+            open={fabOpen.open}
+            icon={fabOpen.open ? 'close' : 'line-scan'}
+            actions={[
+                { icon: 'phone-outline', label: session.operator2, onPress: () => openScan(session.operator2) },
+                { icon: 'phone', label: session.operator, onPress: () => openScan(session.operator) },
+            ]}
+            onStateChange={setFabOpen}
+        />
+    }
 
     return (
         <SafeArea>

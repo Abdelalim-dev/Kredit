@@ -5,7 +5,7 @@ import { RNCamera } from 'react-native-camera';
 import {
     SafeArea, BottomContainer, ScrollView, SectionTitle,
     Description, ResetDescription, ItemStyled, ItemTitleStyled,
-    TopContainer, Title, CameraPreview, Logo
+    TopContainer, Title, CameraPreview, Logo, PreviewBadge
 } from './components.styles'
 
 import { Button } from 'src/components'
@@ -25,6 +25,8 @@ export default function Scan({ navigation, route }) {
     const [suggestions, setSuggestions] = React.useState([])
 
     const [flashOn, setFlashOn] = React.useState(false)
+
+    const { params: { operator: SelectedOperator } } = route
 
     const textRecognized = ({ textBlocks }) => {
         if (textBlocks.length > 0) {
@@ -120,7 +122,9 @@ export default function Scan({ navigation, route }) {
                     <Title>{_('screens.scan.title')}</Title>
                 </TopContainer>
 
-                <CameraPreview />
+                <CameraPreview >
+                    <PreviewBadge>{SelectedOperator}</PreviewBadge>
+                </CameraPreview>
 
                 <BottomContainer>
                     <Suggestions />
