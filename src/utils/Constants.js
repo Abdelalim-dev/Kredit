@@ -7,7 +7,7 @@ export const balanceUSSD = {
     "Glo": "#124*1#",
 }
 
-export const purchaseUSSD = {
+export const AIRTIME_USSDS = {
     "MTN": "555",
     "9mobile": "222",
     "Airtel": "126",

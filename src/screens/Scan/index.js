@@ -11,6 +11,7 @@ import {
 import { Button } from 'src/components'
 import { IconButton } from 'react-native-paper';
 import { cameraPermissionOptions } from './config'
+import { AIRTIME_USSDS } from 'src/utils/Constants'
 
 
 
@@ -65,9 +66,7 @@ export default function Scan({ navigation, route }) {
 
     const CardItem = ({ index, number }) => {
 
-        // TODO: Use context to get the USSD code
-        // ...
-        const USSDFromContext = 123
+        const USSDFromContext = AIRTIME_USSDS[SelectedOperator]
 
         const dialNumber = (voucherCode = 0, USSD) => Linking.openURL(`tel:*${USSD}*${voucherCode}#`)
 
