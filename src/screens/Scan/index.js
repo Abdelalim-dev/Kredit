@@ -12,6 +12,7 @@ import { Button } from 'src/components'
 import { IconButton } from 'react-native-paper';
 import { cameraPermissionOptions } from './config'
 import { AIRTIME_USSDS } from 'src/utils/Constants'
+import * as Formatter from 'src/utils/Formatter'
 
 
 
@@ -94,7 +95,7 @@ export default function Scan({ navigation, route }) {
     }
 
     const SuggestionItems = () =>
-        suggestions.map((value, index) => <CardItem key={index} index={index} number={value} />)
+        suggestions.map((value, index) => <CardItem key={index} index={index} number={Formatter.airtime(value)} />)
 
     const Suggestions = () => (
         !suggestions.length ? <ShimmerSuggestionsView /> :
