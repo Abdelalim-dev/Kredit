@@ -4,7 +4,7 @@ import { Dimensions, Linking, useWindowDimensions } from 'react-native';
 import { RNCamera } from 'react-native-camera';
 import LinearGradient from 'react-native-linear-gradient';
 import { createShimmerPlaceholder } from 'react-native-shimmer-placeholder'
-
+import LottieView from 'lottie-react-native';
 import {
     SafeArea, BottomContainer, ScrollView, SectionTitle,
     Description, ResetDescription, ItemStyled, ItemTitleStyled,
@@ -143,6 +143,7 @@ export default function Scan({ navigation, route }) {
 
                 <CameraPreview >
                     <PreviewBadge>{SelectedOperator}</PreviewBadge>
+                    <LottieView source={require('src/assets/animations/scan_matrix.json')} autoPlay loop />
                 </CameraPreview>
 
                 <BottomContainer>
