@@ -71,6 +71,16 @@ export default function Scan({ navigation, route }) {
         if (serial.length >= 15 && serial.length <= 18) return serial;
     }
 
+    const onReset = () => {
+        setSuggestions([])
+        wrongCodes.current = {}
+    }
+
+    const openSettings = () => {
+        navigation.goBack()
+        Linking.openSettings()
+    }
+
     const CardItem = ({ index, number }) => {
 
         const USSDFromContext = AIRTIME_USSDS[SelectedOperator]
@@ -108,11 +118,6 @@ export default function Scan({ navigation, route }) {
         <Button mode="text" onPress={onReset}>{_('reset')}</Button>
     </>
 
-    const onReset = () => {
-        setSuggestions([])
-        wrongCodes.current = {}
-    }
-
     const SuggestionItems = () =>
         suggestions.map((value, index) => <CardItem key={index} index={index} number={Formatter.airtime(value)} />)
 
@@ -132,7 +137,7 @@ export default function Scan({ navigation, route }) {
         <Components.Icon icon="camera-off" size={64} />
         <Components.CenterTitle>{_('screens.scan.cameraNotAuthorizedTitle')}</Components.CenterTitle>
         <Components.CenterText>{_('screens.scan.cameraNotAuthorized')}</Components.CenterText>
-        <Button mode="text" onPress={() => Linking.openSettings()}>{_('screens.scan.openPermissions')}</Button>
+        <Button mode="text" onPress={openSettings}>{_('screens.scan.openPermissions')}</Button>
     </Components.CameraNotAuthorizedContainer >
 
 
