@@ -7,7 +7,6 @@ import {
     SafeArea, ScrollView, KeyboardAvoidingView, Banner, AccessoryContainer,
     Headline, FAB,
 } from './components.styles'
-import * as Components from './components.styles'
 import { ROUTES } from '../../utils/Constants'
 import { BANK_USSDS } from 'src/utils/Constants'
 
@@ -32,19 +31,19 @@ export default function PurchaseScreen({ navigation }) {
 
     const inputAccessoryViewID = 'someUniqueID';
 
-    const purchase = (operatorNetwork) => {
+    const purchase = () => {
 
         if (!validateForm()) return
 
-        performPurchase(operatorNetwork)
+        performPurchase()
     }
 
+    // TODO: Check if the bank name is set
     const validateForm = () => amountRef.current.isValid(Linter.chargeAmountValidation())
 
-    const performPurchase = (operatorNetwork) => {
-        // TODO: Remove later when bank USSDs are all inserted
-        operatorNetwork = "TEST"
-        const USSD = BANK_USSDS[operatorNetwork]
+    const performPurchase = () => {
+        // TODO: Get the user bank
+        const USSD = BANK_USSDS["TEST"]
         Linking.openURL(`tel:*${USSD}*${amount}#`)
     }
 
@@ -86,15 +85,6 @@ export default function PurchaseScreen({ navigation }) {
         />
     }
 
-    const BigButton = (props) => {
-        return (
-            <Button style={{ justifyContent: 'center' }}
-                contentStyle={{ height: 150 }} {...props}>
-                {props.children}
-            </Button>
-        )
-    }
-
     return (
         <SafeArea>
             <KeyboardAvoidingView behavior="height">
@@ -112,23 +102,10 @@ export default function PurchaseScreen({ navigation }) {
                         inputAccessoryViewID={inputAccessoryViewID}
                     />
 
-                    <Components.Row>
-                        <Components.Column>
-                            <BigButton icon="sim" onPress={() => purchase(operator)}>
-                                <Components.Title>{operator}</Components.Title>
-                            </BigButton>
-                            <Components.Description>SIM1</Components.Description>
-                        </Components.Column>
-
-                        <Components.VSpace />
-
-                        <Components.Column>
-                            <BigButton icon={disabled ? "sim-off" : "sim"} {...{ disabled }} onPress={() => purchase(operator2)}>
-                                <Components.Title {...{ disabled }}>{operator2 || _('misc.noSim')}</Components.Title>
-                            </BigButton>
-                            <Components.Description>SIM2</Components.Description>
-                        </Components.Column>
-                    </Components.Row>
+                    <Button mode='outlined' icon="cash-register" onPress={() => purchase(operator)}
+                        style={{ borderRadius: 75 }} contentStyle={{ height: 150 }}>
+                        {_('purchase')}
+                    </Button>
                 </ScrollView>
             </KeyboardAvoidingView>
             {renderFAB()}
