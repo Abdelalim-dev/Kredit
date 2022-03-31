@@ -96,7 +96,7 @@ export default function Scan({ navigation, route }) {
         }
 
         return <ItemStyled onPress={() => dialNumber(number, USSDFromContext)}>
-            <ItemTitleStyled title={Formatter.airtime(number).toString()}
+            <ItemTitleStyled title={Formatter.airtime(number).toString()} subtitle={`${number.length} ${_('screens.scan.digits')}`}
                 right={() => <IconButton icon="close" onPress={() => removeFromSuggestions(index, number)} />}
             />
         </ItemStyled>

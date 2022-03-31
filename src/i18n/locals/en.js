@@ -49,6 +49,7 @@ const translation = {
             cameraNotAuthorizedTitle: "Camera not authorized",
             cameraNotAuthorized: "To be able to scan airtime tickets you have to grant camera permission from the settings screen",
             openPermissions: "Open settings",
+            digits: "digits",
         },
         more: {
             phone: "Main phone number",
