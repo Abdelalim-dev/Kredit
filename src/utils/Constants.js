@@ -14,6 +14,10 @@ export const AIRTIME_USSDS = {
     "Glo": "123",
 }
 
+export const BANK_USSDS = {
+    "TEST": "111",
+}
+
 export const purchaseFormula =(ussd, voucherCode)=>{
     return `*${ussd}*${voucherCode}#`
 }

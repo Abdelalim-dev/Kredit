@@ -1,14 +1,15 @@
 import React, { useState, useRef } from 'react'
-import { InputAccessoryView } from 'react-native';
+import { InputAccessoryView, Linking } from 'react-native';
 import { SessionContext } from '../../../App'
-import { Input, Button, OperatorMenu } from '../../components'
+import { Input, Button } from '../../components'
 import * as Linter from '../../utils/Lint'
 import {
     SafeArea, ScrollView, KeyboardAvoidingView, Banner, AccessoryContainer,
-    Headline, ActionButton, Portal, FAB,
+    Headline, FAB,
 } from './components.styles'
 import * as Components from './components.styles'
 import { ROUTES } from '../../utils/Constants'
+import { BANK_USSDS } from 'src/utils/Constants'
 
 import bannerImage from 'src/assets/images/undraw_purchase.png'
 
@@ -41,7 +42,10 @@ export default function PurchaseScreen({ navigation }) {
     const validateForm = () => amountRef.current.isValid(Linter.chargeAmountValidation())
 
     const performPurchase = (operatorNetwork) => {
-        alert('Should start the purchase: ' + operatorNetwork)
+        // TODO: Remove later when bank USSDs are all inserted
+        operatorNetwork = "TEST"
+        const USSD = BANK_USSDS[operatorNetwork]
+        Linking.openURL(`tel:*${USSD}*${amount}#`)
     }
 
     const onReturn = (field) => {
