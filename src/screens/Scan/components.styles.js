@@ -28,9 +28,8 @@ export const CameraPreview = styled.View`
     flex: 1;
 `
 
-export const BottomContainer = styled.View`
+export const BottomContainer = styled.ScrollView`
     flex: 2;
-    justify-content: center;
     background-color: #fafafa;
     padding-left: 16px;
     padding-right: 16px;
@@ -64,7 +63,8 @@ export const PreviewBadge = styled(Description)`
     background-color: #FFF;
     border-radius: 4px;
     color: #000;
-    padding-horizontal: 3px;
+    padding-left: 3px;
+    padding-right: 3px;
     margin-left: 1px;
     align-self: flex-start;
     opacity: 0.6;
