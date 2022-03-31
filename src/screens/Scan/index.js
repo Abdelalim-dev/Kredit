@@ -1,13 +1,16 @@
 // Scan
 import React from 'react'
-import { Dimensions, Linking } from 'react-native';
+import { Dimensions, Linking, useWindowDimensions } from 'react-native';
 import { RNCamera } from 'react-native-camera';
+import LinearGradient from 'react-native-linear-gradient';
+import { createShimmerPlaceholder } from 'react-native-shimmer-placeholder'
+
 import {
     SafeArea, BottomContainer, ScrollView, SectionTitle,
     Description, ResetDescription, ItemStyled, ItemTitleStyled,
     TopContainer, Title, CameraPreview, Logo, PreviewBadge
 } from './components.styles'
-
+import * as Components from './components.styles'
 import { Button } from 'src/components'
 import { IconButton } from 'react-native-paper';
 import { cameraPermissionOptions } from './config'
@@ -21,6 +24,7 @@ const CAM_VIEW_HEIGHT = Dimensions.get('screen').width * 1.5;
 const LIMIT_TOP = CAM_VIEW_HEIGHT * 0.33;
 const LIMIT_BOTTOM = LIMIT_TOP + 80;
 
+
 export default function Scan({ navigation, route }) {
     const cameraRef = React.useRef()
     const wrongCodes = React.useRef({})
@@ -28,6 +32,8 @@ export default function Scan({ navigation, route }) {
 
     const [flashOn, setFlashOn] = React.useState(false)
 
+    const { width: windowWidth } = useWindowDimensions();
+    const ShimmerPlaceHolder = createShimmerPlaceholder(LinearGradient)
     const { params: { operator: SelectedOperator } } = route
 
     const textRecognized = ({ textBlocks }) => {
@@ -84,7 +90,17 @@ export default function Scan({ navigation, route }) {
     }
 
     const ShimmerSuggestionsView = () => <>
-        <ResetDescription>THE SHIMMER VIEW WILL BE HERE</ResetDescription>
+
+        {[0, 1, 2].map((_, index) =>
+            <Components.ShimmerItemStyled key={index}>
+                <ItemTitleStyled
+                    left={() => <ShimmerPlaceHolder style={{ borderRadius: 12 }} width={(250)} />}
+                    right={() => <Components.ShimmerDot />}
+                />
+            </Components.ShimmerItemStyled>
+        )}
+
+
         <ResetDescription>{_('screens.scan.noSuggestions')}</ResetDescription>
         <Button mode="text" onPress={onReset}>{_('reset')}</Button>
     </>

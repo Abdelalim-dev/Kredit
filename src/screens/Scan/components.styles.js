@@ -6,6 +6,9 @@ export const SafeArea = styled.SafeAreaView`
     flex:1;
 `
 
+export const Container = styled.View`
+`
+
 export const TopContainer = styled.View`
     flex: 1;
     justify-content: center;
@@ -81,4 +84,17 @@ export const ItemStyled = styled(Card)`
 
 export const ItemTitleStyled = styled(Card.Title)`
     font-size: 4px;
+`
+
+export const ShimmerItemStyled = styled(ItemStyled)`
+    elevation: 0;
+    background-color: #f4f4f4;
+    `
+
+export const ShimmerDot = styled.View`
+    width: 24px;
+    height: 24px;
+    border-radius:12px;
+    background-color: #e0e0e0;
+    margin: 12px;
 `
