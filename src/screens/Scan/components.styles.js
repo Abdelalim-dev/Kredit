@@ -35,20 +35,6 @@ export const BottomContainer = styled.ScrollView`
     padding-right: 16px;
 `
 
-export const TorchButton = styled.TouchableOpacity`
-    width: 100px;
-    height: 100px;
-    align-items: center;
-    justify-content: center;
-    background-color: ${({ flashOn }) => flashOn ? '#fff' : 'gray'};
-    border-radius: ${({ flashOn }) => flashOn ? '40px' : 0};
-`
-
-export const TorchIcon = styled(IconButton)`
-    width: 64px;
-    height: 64px;
-`
-
 export const ScrollView = styled.ScrollView`
 `
 
@@ -68,6 +54,14 @@ export const PreviewBadge = styled(Description)`
     margin-left: 1px;
     align-self: flex-start;
     opacity: 0.6;
+`
+
+export const FlashButton = styled(IconButton)`
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
 `
 
 export const ResetDescription = styled(Caption)`
