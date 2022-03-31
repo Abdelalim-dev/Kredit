@@ -61,6 +61,7 @@ const translation = {
         ok: 'Ok',
         cancel: 'Cancel',
         confirm: 'Confirm',
+        noSim: "No SIM",
     }
 };
 export default translation;

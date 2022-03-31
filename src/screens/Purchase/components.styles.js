@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { Button } from '../../components'
-import { Headline as H, FAB as FloatingButton } from 'react-native-paper'
+import { Caption, Headline as H, FAB as FloatingButton, Title as T } from 'react-native-paper'
 
 
 export const SafeArea = styled.SafeAreaView`
@@ -44,4 +44,27 @@ export const FAB = styled(FloatingButton)`
     bottom: 0;
     right: 0;
     margin: 16px;
+`
+
+export const Row = styled.View`
+    flex-direction:row;
+    justify-content: space-between;
+    margin-left: 16px;
+    margin-right: 16px;
+    margin-top: 16px;
+`
+
+export const Column = styled.View`
+    flex:1;
+`
+export const Title = styled(T)`
+    color: ${({ disabled }) => disabled ? '#989898' : '#FFF'};
+`
+
+export const Description = styled(Caption)`
+    text-align: center;
+`
+
+export const VSpace = styled.View`
+    width: 16px;
 `

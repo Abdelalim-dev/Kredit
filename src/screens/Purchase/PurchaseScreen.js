@@ -7,6 +7,7 @@ import {
     SafeArea, ScrollView, KeyboardAvoidingView, Banner, AccessoryContainer,
     Headline, ActionButton, Portal, FAB,
 } from './components.styles'
+import * as Components from './components.styles'
 import { ROUTES } from '../../utils/Constants'
 
 import bannerImage from 'src/assets/images/undraw_purchase.png'
@@ -16,33 +17,31 @@ const FIELD_AMOUNT = "amount"
 
 export default function PurchaseScreen({ navigation }) {
 
-    const { session } = React.useContext(SessionContext)
+    const { session: { operator, operator2 } } = React.useContext(SessionContext)
+    const disabled = !operator2
+
 
     const [amount, setAmount] = useState("");
-    const [operator, setOperator] = useState("");
 
     const [fabOpen, setFabOpen] = useState({ open: false });
 
     const amountRef = useRef()
     const opRef = useRef()
 
+
     const inputAccessoryViewID = 'someUniqueID';
 
-    const purchase = () => {
-        const isValid = validateForm()
-        if (!isValid) return
+    const purchase = (operatorNetwork) => {
 
-        performPurchase()
+        if (!validateForm()) return
+
+        performPurchase(operatorNetwork)
     }
 
-    const validateForm = () => {
-        let isValid = amountRef.current.isValid(Linter.chargeAmountValidation())
-        isValid = opRef.current.isValid(Linter.requiredValidation()) && isValid
-        return isValid;
-    }
+    const validateForm = () => amountRef.current.isValid(Linter.chargeAmountValidation())
 
-    const performPurchase = () => {
-        alert('Should start the purchase')
+    const performPurchase = (operatorNetwork) => {
+        alert('Should start the purchase: ' + operatorNetwork)
     }
 
     const onReturn = (field) => {
@@ -67,24 +66,29 @@ export default function PurchaseScreen({ navigation }) {
             </InputAccessoryView>
     )
 
-    const renderFAB = () => {
-        const { operator, operator2 } = session
+    const renderFAB = () => (operator2 && operator2 != operator) ? <FABGroup /> : <FABButton />
 
-        return (operator2 && operator2 != operator) ? <FABGroup /> : <FABButton />
-    }
-
-    const FABButton = () => <FAB icon="line-scan" onPress={() => openScan(session.operator)} />
+    const FABButton = () => <FAB icon="line-scan" onPress={() => openScan(operator)} />
 
     const FABGroup = () => {
         return <FAB.Group
             open={fabOpen.open}
             icon={fabOpen.open ? 'close' : 'line-scan'}
             actions={[
-                { icon: 'phone-outline', label: session.operator2, onPress: () => openScan(session.operator2) },
-                { icon: 'phone', label: session.operator, onPress: () => openScan(session.operator) },
+                { icon: 'phone-outline', label: operator2, onPress: () => openScan(operator2) },
+                { icon: 'phone', label: operator, onPress: () => openScan(operator) },
             ]}
             onStateChange={setFabOpen}
         />
+    }
+
+    const BigButton = (props) => {
+        return (
+            <Button style={{ justifyContent: 'center' }}
+                contentStyle={{ height: 150 }} {...props}>
+                {props.children}
+            </Button>
+        )
     }
 
     return (
@@ -104,9 +108,23 @@ export default function PurchaseScreen({ navigation }) {
                         inputAccessoryViewID={inputAccessoryViewID}
                     />
 
-                    <OperatorMenu ref={opRef} label={_('sim1')} onItemSelected={setOperator} />
+                    <Components.Row>
+                        <Components.Column>
+                            <BigButton icon="sim" onPress={() => purchase(operator)}>
+                                <Components.Title>{operator}</Components.Title>
+                            </BigButton>
+                            <Components.Description>SIM1</Components.Description>
+                        </Components.Column>
 
-                    <ActionButton mode="outlined" onPress={purchase}> {_('purchase')} </ActionButton>
+                        <Components.VSpace />
+
+                        <Components.Column>
+                            <BigButton icon={disabled ? "sim-off" : "sim"} {...{ disabled }} onPress={() => purchase(operator2)}>
+                                <Components.Title {...{ disabled }}>{operator2 || _('misc.noSim')}</Components.Title>
+                            </BigButton>
+                            <Components.Description>SIM2</Components.Description>
+                        </Components.Column>
+                    </Components.Row>
                 </ScrollView>
             </KeyboardAvoidingView>
             {renderFAB()}
