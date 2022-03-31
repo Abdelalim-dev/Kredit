@@ -161,12 +161,11 @@ export default function Scan({ navigation, route }) {
 
                 <CameraPreview >
                     <PreviewBadge>{SelectedOperator}</PreviewBadge>
+                    
                     <LottieView source={require('src/assets/animations/scan_matrix.json')} autoPlay loop />
-                    <Components.FlashButton
-                        icon={flashOn ? 'lightbulb-on-outline' : 'lightbulb-outline'}
-                        color="#FFFFFF"
-                        size={20}
-                        onPress={() => setFlashOn(!flashOn)} />
+                    
+                    <Components.FlashButton color="#FFFFFF" size={20} onPress={() => setFlashOn(!flashOn)}
+                        icon={flashOn ? 'lightbulb-on-outline' : 'lightbulb-outline'} />
                 </CameraPreview>
 
                 <BottomContainer>
