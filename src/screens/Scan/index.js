@@ -40,11 +40,13 @@ export default function Scan({ navigation, route }) {
         if (textBlocks.length > 0) {
 
             textBlocks.forEach(block => {
-                // To limit the scan area
-                // Only from the preview section instead of the whole screen
+                // Scan only withing the preview section instead of the whole screen
                 if (block.bounds.origin.y > LIMIT_TOP &&
-                    block.bounds.origin.y < LIMIT_BOTTOM)
-                    handleScan(block.value)
+                    block.bounds.origin.y < LIMIT_BOTTOM) {
+
+                    // Sometimes multiple lines are recognized as a single string
+                    block.value.split('\n').forEach(subBlock => handleScan(subBlock))
+                }
             })
         }
     }
@@ -93,7 +95,7 @@ export default function Scan({ navigation, route }) {
         }
 
         return <ItemStyled onPress={() => dialNumber(number, USSDFromContext)}>
-            <ItemTitleStyled title={number.toString()}
+            <ItemTitleStyled title={Formatter.airtime(number).toString()}
                 right={() => <IconButton icon="close" onPress={() => removeFromSuggestions(index, number)} />}
             />
         </ItemStyled>
@@ -119,7 +121,7 @@ export default function Scan({ navigation, route }) {
     </>
 
     const SuggestionItems = () =>
-        suggestions.map((value, index) => <CardItem key={index} index={index} number={Formatter.airtime(value)} />)
+        suggestions.map((value, index) => <CardItem key={index} index={index} number={value} />)
 
     const Suggestions = () => (
         !suggestions.length ? <ShimmerSuggestionsView /> :
@@ -161,9 +163,9 @@ export default function Scan({ navigation, route }) {
 
                 <CameraPreview >
                     <PreviewBadge>{SelectedOperator}</PreviewBadge>
-                    
+
                     <LottieView source={require('src/assets/animations/scan_matrix.json')} autoPlay loop />
-                    
+
                     <Components.FlashButton color="#FFFFFF" size={20} onPress={() => setFlashOn(!flashOn)}
                         icon={flashOn ? 'lightbulb-on-outline' : 'lightbulb-outline'} />
                 </CameraPreview>
