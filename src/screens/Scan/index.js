@@ -40,9 +40,10 @@ export default function Scan({ navigation, route }) {
         if (textBlocks.length > 0) {
 
             textBlocks.forEach(block => {
-                // Scan only withing the preview section instead of the whole screen
-                if (block.bounds.origin.y > LIMIT_TOP &&
-                    block.bounds.origin.y < LIMIT_BOTTOM) {
+
+                const { bounds: { origin: { y: originY } } } = block
+
+                if (originY > LIMIT_TOP && originY < LIMIT_BOTTOM) { // Scan only within the preview section instead of the whole screen
 
                     // Sometimes multiple lines are recognized as a single string
                     block.value.split('\n').forEach(subBlock => handleScan(subBlock))
