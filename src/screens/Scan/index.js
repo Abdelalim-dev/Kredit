@@ -1,6 +1,6 @@
 // Scan
 import React from 'react'
-import { Dimensions, Linking, useWindowDimensions } from 'react-native';
+import { Dimensions, Linking, useWindowDimensions, Platform } from 'react-native';
 import { RNCamera } from 'react-native-camera';
 import LinearGradient from 'react-native-linear-gradient';
 import { createShimmerPlaceholder } from 'react-native-shimmer-placeholder'
@@ -125,8 +125,13 @@ export default function Scan({ navigation, route }) {
             </ScrollView>
     )
 
+    const IosClose = () =>
+        Platform.OS != "ios" ? null : <Components.CloseButton icon="close" onPress={() => navigation.goBack()} />
+
+
     return (
         <SafeArea>
+            <IosClose />
             <RNCamera
                 ref={cameraRef}
                 style={{ flex: 1 }}

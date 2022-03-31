@@ -4,6 +4,14 @@ import { Title as T, IconButton, Card, Subheading, Caption } from 'react-native-
 
 export const SafeArea = styled.SafeAreaView`
     flex:1;
+    background-color: #FFF;
+`
+
+export const CloseButton = styled(IconButton)`
+    width: 24px;
+    height: 24px;
+    margin-right: 16px;
+    align-self: flex-end;
 `
 
 export const Container = styled.View`
