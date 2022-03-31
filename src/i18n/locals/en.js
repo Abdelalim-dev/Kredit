@@ -26,7 +26,7 @@ const translation = {
     purchase: "Top up",
     balance: "Balance",
     more: "More",
-    screens:{
+    screens: {
         balance: {
             title: "Check your balance",
             noSim: "No SIM",
@@ -46,6 +46,9 @@ const translation = {
             description: "If you don't see your code please consider removing some suggestions. Others will showup",
             noSuggestions: "If this is taking long, please reset the scan",
             reset: "Reset",
+            cameraNotAuthorizedTitle: "Camera not authorized",
+            cameraNotAuthorized: "To be able to scan airtime tickets you have to grant camera permission from the settings screen",
+            openPermissions: "Open settings",
         },
         more: {
             phone: "Main phone number",

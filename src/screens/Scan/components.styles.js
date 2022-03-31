@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Title as T, IconButton, Card, Subheading, Caption } from 'react-native-paper'
+import { Title as T, IconButton, Card, Subheading, Caption, Paragraph } from 'react-native-paper'
 
 
 export const SafeArea = styled.SafeAreaView`
@@ -15,6 +15,25 @@ export const CloseButton = styled(IconButton)`
 `
 
 export const Container = styled.View`
+`
+
+export const CameraNotAuthorizedContainer = styled.View`
+    flex:1;
+    align-items: center;
+    justify-content: center;
+    padding-left: 16px;
+    padding-right: 16px;
+`
+
+export const Icon = styled(IconButton)`
+`
+
+export const CenterTitle = styled(T)`
+    text-align: center;
+`
+
+export const CenterText = styled(Paragraph)`
+    text-align: center;
 `
 
 export const TopContainer = styled.View`

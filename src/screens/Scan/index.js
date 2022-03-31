@@ -128,6 +128,13 @@ export default function Scan({ navigation, route }) {
     const IosClose = () =>
         Platform.OS != "ios" ? null : <Components.CloseButton icon="close" onPress={() => navigation.goBack()} />
 
+    const CameraNotAuthorizedView = () => <Components.CameraNotAuthorizedContainer>
+        <Components.Icon icon="camera-off" size={64} />
+        <Components.CenterTitle>{_('screens.scan.cameraNotAuthorizedTitle')}</Components.CenterTitle>
+        <Components.CenterText>{_('screens.scan.cameraNotAuthorized')}</Components.CenterText>
+        <Button mode="text" onPress={() => Linking.openSettings()}>{_('screens.scan.openPermissions')}</Button>
+    </Components.CameraNotAuthorizedContainer >
+
 
     return (
         <SafeArea>
@@ -140,6 +147,7 @@ export default function Scan({ navigation, route }) {
                 flashMode={flashOn ? RNCamera.Constants.FlashMode.torch : RNCamera.Constants.FlashMode.auto}
                 androidCameraPermissionOptions={cameraPermissionOptions}
                 onTextRecognized={textRecognized}
+                notAuthorizedView={<CameraNotAuthorizedView />}
             >
                 <TopContainer>
                     <Logo source={require('src/assets/images/logo.png')}></Logo>
