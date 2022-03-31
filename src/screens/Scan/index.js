@@ -91,7 +91,10 @@ export default function Scan({ navigation, route }) {
 
     const ShimmerSuggestionsView = () => <>
 
-        {[0, 1, 2].map((_, index) =>
+        <ShimmerPlaceHolder style={{ borderRadius: 0, marginTop: 16, marginBottom: 10 }} width={(150)} />
+        <ShimmerPlaceHolder style={{ borderRadius: 0, marginBottom: 6 }} width={(windowWidth - 32)} height={10} />
+        <ShimmerPlaceHolder style={{ borderRadius: 0, marginBottom: 12 }} width={(250)} height={10} />
+        {[0, 1].map((_, index) =>
             <Components.ShimmerItemStyled key={index}>
                 <ItemTitleStyled
                     left={() => <ShimmerPlaceHolder style={{ borderRadius: 12 }} width={(250)} />}
