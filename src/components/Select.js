@@ -10,9 +10,6 @@ const MenuStyled = styled(Menu)`
     padding-bottom: 12px;
 `
 
-const Icon = styled(TextInput.Icon)`
-`
-
 /**
  * 
  * @param {onItemSelected: callback, icon: string, items: array(string)} props 
@@ -56,7 +53,7 @@ function Select(props, ref) {
             {...props}
             params={{
                 icon: props.icon || "",
-                right: <Icon name='close' onPress={clear} />,
+                right: <TextInput.Icon name='close' onPress={clear} />,
                 inputOverlay: Platform.OS == 'android'
             }}
         />
