@@ -14,13 +14,21 @@ export const AIRTIME_USSDS = {
     "Glo": "123",
 }
 
+// *USSD* amount # 
 export const BANK_USSDS = {
-    "TEST": "111",
+    "Access": "901",
+    "Ecobank": "326",
+    "FCMB": "329",
+    "Fidelity": "770",
+    "First": "894",
+    "Guarantee Trust (GTB)": "737",
+    "Keystone": "7111",
+    "Polaris (Skye)": "833",
+    "Stanbic IBTC": "909",
+    "Union": "826",
+    "Zenith": "966",
 }
 
-export const purchaseFormula =(ussd, voucherCode)=>{
-    return `*${ussd}*${voucherCode}#`
-}
 
 export const ROUTES = {
     PURCHASE: "Purchase",
