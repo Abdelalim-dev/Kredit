@@ -29,6 +29,7 @@ export const BANK_USSDS = {
     "Zenith": "966",
 }
 
+export const BANKS = Object.keys(BANK_USSDS)
 
 export const ROUTES = {
     PURCHASE: "Purchase",

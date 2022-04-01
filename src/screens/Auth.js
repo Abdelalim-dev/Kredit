@@ -1,12 +1,13 @@
 import React, { useContext, useState } from 'react'
-import { InputAccessoryView } from 'react-native';
+import { InputAccessoryView, Keyboard } from 'react-native';
 import styled from 'styled-components'
 import { SessionContext } from '../../App'
-import { Input, Button, OperatorMenu } from '../components'
+import { Input, Button, OperatorMenu, Select } from '../components'
 import { ScrollView } from '../components/styles'
 import { Divider, Caption } from 'react-native-paper';
 import * as Linter from '../utils/Lint'
 import { SessionPersistence } from '../services/persistence'
+import { BANKS } from 'src/utils/Constants'
 
 const SafeArea = styled.SafeAreaView`
     flex:1;
@@ -41,12 +42,12 @@ export default function Auth() {
     const [phone2, setPhone2] = useState("");
     const [selectedOp2, setOp2] = useState("");
     const [bank, setBank] = useState("");
+    const [bank2, setBank2] = useState("");
 
     const phoneRef = React.useRef()
     const opRef = React.useRef()
     const phone2Ref = React.useRef()
     const op2Ref = React.useRef()
-    const bankRef = React.useRef()
 
     const inputAccessoryViewID = 'uniqueID';
     const inputAccessoryViewID2 = 'uniqueID2';
@@ -65,6 +66,7 @@ export default function Auth() {
             bank: bank,
             phone2: phone2,
             operator2: selectedOp2,
+            bank2: bank2,
         }
         SessionPersistence.save(sessionData)
         session.changeSession(sessionData)
@@ -88,7 +90,7 @@ export default function Auth() {
                 phone2Ref.current.focus()
                 break
             case FIELD_PHONE2:
-                bankRef.current.focus()
+                Keyboard.dismiss()
                 break
             case FIELD_BANK:
                 register()
@@ -97,12 +99,12 @@ export default function Auth() {
     }
 
     const inputAccessoryPhone1 = () => inputAccessoryView(inputAccessoryViewID, () => onReturn(FIELD_PHONE))
-    const inputAccessoryPhone2 = () => inputAccessoryView(inputAccessoryViewID2, () => onReturn(FIELD_PHONE2))
-    const inputAccessoryView = (inputID, onPress) => (
+    const inputAccessoryPhone2 = () => inputAccessoryView(inputAccessoryViewID2, () => onReturn(FIELD_PHONE2), _('done'))
+    const inputAccessoryView = (inputID, onPress, buttonTitle = _('next')) => (
         Platform.OS == 'android' ? null :
             <InputAccessoryView nativeID={inputID}>
                 <AccessoryContainer>
-                    <Button mode="text" onPress={onPress}>{_('next')}</Button>
+                    <Button mode="text" onPress={onPress}>{buttonTitle}</Button>
                 </AccessoryContainer>
             </InputAccessoryView>
     )
@@ -131,6 +133,7 @@ export default function Auth() {
 
                     <OperatorMenu ref={opRef} label={_('sim1')} onItemSelected={setOp} />
 
+                    <Select label={_('bank')} onItemSelected={setBank} icon='bank' items={BANKS} />
 
                     <Divider />
                     <VerticalSpace />
@@ -139,28 +142,17 @@ export default function Auth() {
                     <Input
                         ref={phone2Ref}
                         keyboardType="phone-pad"
-                        returnKeyType="next"
-                        onSubmitEditing={() => onReturn(FIELD_PHONE2)}
                         label={`${_('phone2')} (${_('phoneHint')})`}
                         value={phone2}
                         onChangeText={text => setPhone2(text)}
                         params={{ icon: 'phone' }}
-                        dense={true}
                         inputAccessoryViewID={inputAccessoryViewID2}
+                        dense={true}
                     />
 
                     <OperatorMenu ref={op2Ref} dense={true} label={_('sim2')} onItemSelected={setOp2} />
 
-                    <Input
-                        ref={bankRef}
-                        returnKeyType="done"
-                        onSubmitEditing={() => onReturn(FIELD_BANK)}
-                        label={_('bank')}
-                        value={bank}
-                        onChangeText={text => setBank(text)}
-                        params={{ icon: 'bank' }}
-                        dense={true}
-                    />
+                    <Select label={_('bank2')} onItemSelected={setBank2} icon='bank' dense={true} items={BANKS} />
 
                     <Button onPress={register}> {_('login')} </Button>
                 </ScrollView>

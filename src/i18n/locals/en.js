@@ -8,6 +8,7 @@ const translation = {
     phone2: "Phone 2",
     sim2: "Operator (SIM 2)",
     bank: "Bank name",
+    bank2: "Bank name (2)",
     required: "required",
     optional: "optional",
     validations: {
