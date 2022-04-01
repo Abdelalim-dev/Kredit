@@ -4,7 +4,7 @@ export const balanceUSSD = {
     "MTN": "*556#",
     "9mobile": "*232#",
     "Airtel": "*123#",
-    "Glo": "#124*1#",
+    "Glo": "*124#",
 }
 
 export const AIRTIME_USSDS = {
