@@ -31,7 +31,6 @@ const AccessoryContainer = styled.View`
 `
 
 const FIELD_PHONE = "phone"
-const FIELD_IBAN = "iban"
 const FIELD_PHONE2 = "phone2"
 const FIELD_BANK = "bank"
 
@@ -41,12 +40,10 @@ export default function Auth() {
     const [selectedOp, setOp] = useState(""); // Operator
     const [phone2, setPhone2] = useState("");
     const [selectedOp2, setOp2] = useState("");
-    const [iban, setIban] = useState("");
     const [bank, setBank] = useState("");
 
     const phoneRef = React.useRef()
     const opRef = React.useRef()
-    const ibanRef = React.useRef()
     const phone2Ref = React.useRef()
     const op2Ref = React.useRef()
     const bankRef = React.useRef()
@@ -65,7 +62,6 @@ export default function Auth() {
         let sessionData = {
             phone: phone,
             operator: selectedOp,
-            iban: iban,
             bank: bank,
             phone2: phone2,
             operator2: selectedOp2,
@@ -77,7 +73,6 @@ export default function Auth() {
     const validateForm = () => {
         let isValid = phoneRef.current.isValid(Linter.phoneValidation())
         isValid = opRef.current.isValid(Linter.requiredValidation()) && isValid
-        isValid = ibanRef.current.isValid(Linter.ibanValidation()) && isValid
 
         // Initially undefined: Not rendered when accordion is contracted
         if (phone2Ref.current)
@@ -90,9 +85,6 @@ export default function Auth() {
     const onReturn = (field) => {
         switch (field) {
             case FIELD_PHONE:
-                ibanRef.current.focus()
-                break
-            case FIELD_IBAN:
                 phone2Ref.current.focus()
                 break
             case FIELD_PHONE2:
@@ -139,15 +131,6 @@ export default function Auth() {
 
                     <OperatorMenu ref={opRef} label={_('sim1')} onItemSelected={setOp} />
 
-                    <Input
-                        ref={ibanRef}
-                        returnKeyType="next"
-                        onSubmitEditing={() => onReturn(FIELD_IBAN)}
-                        label={_('iban')}
-                        value={iban}
-                        onChangeText={text => setIban(text)}
-                        params={{ icon: 'bank' }}
-                    />
 
                     <Divider />
                     <VerticalSpace />

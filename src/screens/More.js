@@ -42,7 +42,7 @@ export default function More() {
         sessionValue.changeSession(null)
     }
 
-    const { session: { phone, operator, iban, bank, phone2, operator2 } } = sessionValue
+    const { session: { phone, operator, bank, phone2, operator2 } } = sessionValue
     // console.log({ session })
     return (
         <SafeArea>
@@ -57,12 +57,6 @@ export default function More() {
                 title={operator}
                 description="SIM 1"
                 left={props => <List.Icon {...props} icon="sim-outline" />}
-            />
-
-            <Item
-                title={iban || _('misc.none')}
-                description={_('screens.more.iban')}
-                left={props => <List.Icon {...props} icon="credit-card-outline" />}
             />
 
             <Item

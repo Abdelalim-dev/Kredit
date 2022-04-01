@@ -55,9 +55,6 @@ function Input(props, ref) {
             setErrorMessage(_(`validations.${PHONE}`))
             return false
 
-        } else if (validations[IBAN] && !Linter.iban(value, isOptional)) {
-            setErrorMessage(_(`validations.${IBAN}`))
-            return false
         }
         return true
     }

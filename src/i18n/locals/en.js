@@ -8,14 +8,12 @@ const translation = {
     phone2: "Phone 2",
     sim2: "Operator (SIM 2)",
     bank: "Bank name",
-    iban: "Bank number (To recharge your credit)",
     required: "required",
     optional: "optional",
     validations: {
         required: "Required field",
         required_if: "Required field with :attribute",
         phone: "Invalid phone number",
-        iban: "Invalid bank account number",
         charge_amount: "Pleasse fill in the amount",
         formError: "Some of the fields in the form are invalid, please check the displayed error messages for more details.",
     },
@@ -54,7 +52,6 @@ const translation = {
         more: {
             phone: "Main phone number",
             phone2: "Secondary phone number",
-            iban: "Bank account number",
         }
     },
     misc: {
