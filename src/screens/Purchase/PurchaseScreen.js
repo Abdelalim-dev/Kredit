@@ -1,14 +1,15 @@
 import React, { useState, useRef } from 'react'
 import { InputAccessoryView, Linking } from 'react-native';
 import { SessionContext } from '../../../App'
-import { Input, Button } from '../../components'
+import { Input, Button, Select } from '../../components'
 import * as Linter from '../../utils/Lint'
 import {
     SafeArea, ScrollView, KeyboardAvoidingView, Banner, AccessoryContainer,
     Headline, FAB,
 } from './components.styles'
+import * as Components from './components.styles'
 import { ROUTES } from '../../utils/Constants'
-import { BANK_USSDS } from 'src/utils/Constants'
+import { BANKS, BANK_USSDS } from 'src/utils/Constants'
 
 import bannerImage from 'src/assets/images/undraw_purchase.png'
 
@@ -17,8 +18,9 @@ const FIELD_AMOUNT = "amount"
 
 export default function PurchaseScreen({ navigation }) {
 
-    const { session: { operator, operator2 } } = React.useContext(SessionContext)
-    const disabled = !operator2
+    const { session: { phone2, operator, operator2, bank, bank2 }, changeSession } = React.useContext(SessionContext)
+    const disabled = !bank
+    const disabled2 = !bank2
 
 
     const [amount, setAmount] = useState("");
@@ -26,10 +28,21 @@ export default function PurchaseScreen({ navigation }) {
     const [fabOpen, setFabOpen] = useState({ open: false });
 
     const amountRef = useRef()
-    const opRef = useRef()
 
 
     const inputAccessoryViewID = 'someUniqueID';
+
+    const handleBankSelected = (bank) => {
+        const newSession = JSON.parse(session)
+        newSession.bank = bank
+        changeSession(newSession)
+    }
+
+    const handleBank2Selected = (bank) => {
+        const newSession = JSON.parse(session)
+        newSession.bank2 = bank
+        changeSession(newSession)
+    }
 
     const purchase = () => {
 
@@ -38,7 +51,6 @@ export default function PurchaseScreen({ navigation }) {
         performPurchase()
     }
 
-    // TODO: Check if the bank name is set
     const validateForm = () => amountRef.current.isValid(Linter.chargeAmountValidation())
 
     const performPurchase = () => {
@@ -55,10 +67,6 @@ export default function PurchaseScreen({ navigation }) {
         }
     }
 
-    const openScan = (operator) => {
-        navigation.push(ROUTES.SCAN, { operator })
-    }
-
     const inputAccessoryAmount = () => inputAccessoryView(inputAccessoryViewID, () => onReturn(FIELD_AMOUNT))
     const inputAccessoryView = (inputID, onPress) => (
         Platform.OS == 'android' ? null :
@@ -68,6 +76,8 @@ export default function PurchaseScreen({ navigation }) {
                 </AccessoryContainer>
             </InputAccessoryView>
     )
+
+    const openScan = (operator) => navigation.push(ROUTES.SCAN, { operator })
 
     const renderFAB = () => (operator2 && operator2 != operator) ? <FABGroup /> : <FABButton />
 
@@ -84,6 +94,22 @@ export default function PurchaseScreen({ navigation }) {
             onStateChange={setFabOpen}
         />
     }
+
+    const BigButton = (props) => {
+        return (
+            <Button style={{ justifyContent: 'center' }}
+                contentStyle={{ height: 150 }} {...props}>
+                {props.children}
+            </Button>
+        )
+    }
+
+    const ButtonToAddBank2 = () => !(phone2 && !bank2) ?
+        <Components.Caption>{_('screens.purchase.noPhone')}</Components.Caption> :
+        <Select
+            customAnchor={<Components.Caption>{_('screens.purchase.addBank')}</Components.Caption>}
+            onItemSelected={handleBank2Selected} icon='bank' items={BANKS} />
+
 
     return (
         <SafeArea>
@@ -102,10 +128,31 @@ export default function PurchaseScreen({ navigation }) {
                         inputAccessoryViewID={inputAccessoryViewID}
                     />
 
-                    <Button mode='outlined' icon="cash-register" onPress={() => purchase(operator)}
-                        style={{ borderRadius: 75 }} contentStyle={{ height: 150 }}>
-                        {_('purchase')}
-                    </Button>
+                    <Components.Row>
+                        <Components.Column>
+                            <BigButton disabled={disabled}
+                                icon={disabled ? "bank-off" : "bank"}
+                                onPress={() => purchase(bank)}>
+                                <Components.Title disabled={disabled}>{bank || _('screens.purchase.noBank')}</Components.Title>
+                            </BigButton>
+                            {disabled && <Select
+                                customAnchor={<Components.Caption>{_('screens.purchase.addBank')}</Components.Caption>}
+                                onItemSelected={handleBankSelected} icon='bank' items={BANKS} />}
+                        </Components.Column>
+
+                        <Components.VSpace />
+
+                        <Components.Column>
+                            <BigButton
+                                disabled={disabled2}
+                                icon={disabled2 ? "bank-off" : "bank"}
+                                onPress={() => balanceFor(bank2)}>
+                                <Components.Title disabled={disabled2}>{bank2 || _('screens.purchase.noBank')}</Components.Title>
+                            </BigButton>
+
+                            <ButtonToAddBank2 />
+                        </Components.Column>
+                    </Components.Row>
                 </ScrollView>
             </KeyboardAvoidingView>
             {renderFAB()}

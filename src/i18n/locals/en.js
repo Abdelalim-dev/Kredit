@@ -36,6 +36,8 @@ const translation = {
             amountLabel: "Amount to purchase",
             purchase: "Purchase",
             noBank: "No bank",
+            addBank: "Add bank",
+            noPhone: "No second phone",
         },
         scan: {
             title: "Place the camera over the voucher",
