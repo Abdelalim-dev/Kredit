@@ -98,11 +98,17 @@ export default function PurchaseScreen({ navigation }) {
     const BigButton = (props) => {
         return (
             <Button style={{ justifyContent: 'center' }}
-                contentStyle={{ height: 150 }} {...props}>
-                {props.children}
+                contentStyle={{ height: 150 }} {...props}
+                labelStyle={{ flex: 1 }}
+            >
+                <Components.Title disabled={props.disabled}>{props.value}</Components.Title>
             </Button>
         )
     }
+
+    const ButtonToAddBank = () => disabled && <Select
+        customAnchor={<Components.Caption>{_('screens.purchase.addBank')}</Components.Caption>}
+        onItemSelected={handleBankSelected} icon='bank' items={BANKS} />
 
     const ButtonToAddBank2 = () => !(phone2 && !bank2) ?
         <Components.Caption>{_('screens.purchase.noPhone')}</Components.Caption> :
@@ -132,12 +138,9 @@ export default function PurchaseScreen({ navigation }) {
                         <Components.Column>
                             <BigButton disabled={disabled}
                                 icon={disabled ? "bank-off" : "bank"}
-                                onPress={() => purchase(bank)}>
-                                <Components.Title disabled={disabled}>{bank || _('screens.purchase.noBank')}</Components.Title>
-                            </BigButton>
-                            {disabled && <Select
-                                customAnchor={<Components.Caption>{_('screens.purchase.addBank')}</Components.Caption>}
-                                onItemSelected={handleBankSelected} icon='bank' items={BANKS} />}
+                                onPress={() => purchase(bank)}
+                                value={bank || _('screens.purchase.noBank')} />
+                            <ButtonToAddBank />
                         </Components.Column>
 
                         <Components.VSpace />
@@ -146,10 +149,8 @@ export default function PurchaseScreen({ navigation }) {
                             <BigButton
                                 disabled={disabled2}
                                 icon={disabled2 ? "bank-off" : "bank"}
-                                onPress={() => balanceFor(bank2)}>
-                                <Components.Title disabled={disabled2}>{bank2 || _('screens.purchase.noBank')}</Components.Title>
-                            </BigButton>
-
+                                onPress={() => balanceFor(bank2)}
+                                value={bank2 || _('screens.purchase.noBank')} />
                             <ButtonToAddBank2 />
                         </Components.Column>
                     </Components.Row>
