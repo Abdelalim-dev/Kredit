@@ -75,12 +75,9 @@ export default function Auth() {
     const validateForm = () => {
         let isValid = phoneRef.current.isValid(Linter.phoneValidation())
         isValid = opRef.current.isValid(Linter.requiredValidation()) && isValid
-
-        // Initially undefined: Not rendered when accordion is contracted
-        if (phone2Ref.current)
-            isValid = phone2Ref.current.isValid(Linter.optionalPhoneValidation()) && isValid
-        if (op2Ref.current)
-            isValid = op2Ref.current.isValid(Linter.requiredIfValidation('phone2', phone2)) && isValid
+        isValid = phone2Ref.current.isValid(Linter.requiredIfValidation('bank2', bank2)) && isValid
+        isValid = phone2Ref.current.isValid(Linter.requiredIfValidation('operator2', selectedOp2)) && isValid
+        isValid = op2Ref.current.isValid(Linter.requiredIfValidation('phone2', phone2)) && isValid
         return isValid;
     }
 
