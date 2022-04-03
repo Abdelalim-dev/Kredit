@@ -10,9 +10,17 @@ const MenuStyled = styled(Menu)`
     padding-bottom: 12px;
 `
 
+const Touchable = styled.TouchableOpacity`
+`
+
 /**
  * 
- * @param {onItemSelected: callback, icon: string, items: array(string)} props 
+ * @param {
+ *  onItemSelected: callback,
+ *  icon: string,
+ *  items: array(string)
+ *  anchor: Node?
+ * } props 
  * @param {*} ref 
  * @returns Node
  */
@@ -31,7 +39,10 @@ function Select(props, ref) {
     const handleItemSelected = (value) => {
         const { onItemSelected } = props
         setValue(value)
-        inputRef.current.handleTextChange(value)
+        
+        // For default anchor only
+        !props.customAnchor && inputRef.current.handleTextChange(value)
+        
         onItemSelected && onItemSelected(value)
         closeMenu()
     }
@@ -59,11 +70,14 @@ function Select(props, ref) {
         />
     )
 
+    const wrapAnchor = (anchor) => <Touchable onPress={openMenu}>{anchor}</Touchable>
+
+    const { customAnchor } = props
     return (
         <MenuStyled
             visible={visible}
             onDismiss={closeMenu}
-            anchor={menuAnchor()}>
+            anchor={customAnchor ? wrapAnchor(customAnchor) : menuAnchor()}>
             {props.items.map((value, index) =>
                 <List.Item key={index} title={value} onPress={() => { handleItemSelected(value) }} />
             )}
