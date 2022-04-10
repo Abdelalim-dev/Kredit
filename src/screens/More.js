@@ -59,24 +59,24 @@ export default function More() {
             />
 
             <Item
-                title={bank || _('misc.none')}
+                title={bank || '-'}
                 description={_('bank')}
                 left={props => <List.Icon {...props} icon="bank" />}
             />
 
             <Item
-                title={phone2 || _('misc.none')}
+                title={phone2 || '-'}
                 description={_('screens.more.phone2')}
                 left={props => <List.Icon {...props} icon="phone-outline" />}
             />
             <Item
-                title={operator2 || _('misc.none')}
+                title={operator2 || '-'}
                 description="SIM 2"
                 left={props => <List.Icon {...props} icon="sim-outline" />}
             />
 
             <Item
-                title={bank2 || _('misc.none')}
+                title={bank2 || '-'}
                 description={_('bank2')}
                 left={props => <List.Icon {...props} icon="bank" />}
             />
