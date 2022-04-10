@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { InputAccessoryView, Linking } from 'react-native';
 import { SessionContext } from '../../../App'
-import { Input, Button, Select } from '../../components'
+import { Input, Button } from '../../components'
 import * as Linter from '../../utils/Lint'
 import {
     SafeArea, ScrollView, KeyboardAvoidingView, Banner, AccessoryContainer,
@@ -9,7 +9,7 @@ import {
 } from './components.styles'
 import * as Components from './components.styles'
 import { ROUTES } from '../../utils/Constants'
-import { BANKS, BANK_USSDS } from 'src/utils/Constants'
+import { BANK_USSDS } from 'src/utils/Constants'
 
 import bannerImage from 'src/assets/images/undraw_purchase.png'
 
@@ -18,10 +18,7 @@ const FIELD_AMOUNT = "amount"
 
 export default function PurchaseScreen({ navigation }) {
 
-    const { session: { phone2, operator, operator2, bank, bank2 }, changeSession } = React.useContext(SessionContext)
-    const disabled = !bank
-    const disabled2 = !bank2
-
+    const { session: { phone2, operator, operator2, bank, bank2 } } = React.useContext(SessionContext)
 
     const [amount, setAmount] = useState("");
 
@@ -32,30 +29,17 @@ export default function PurchaseScreen({ navigation }) {
 
     const inputAccessoryViewID = 'someUniqueID';
 
-    const handleBankSelected = (bank) => {
-        const newSession = JSON.parse(session)
-        newSession.bank = bank
-        changeSession(newSession)
-    }
-
-    const handleBank2Selected = (bank) => {
-        const newSession = JSON.parse(session)
-        newSession.bank2 = bank
-        changeSession(newSession)
-    }
-
-    const purchase = () => {
+    const purchase = (bank) => {
 
         if (!validateForm()) return
 
-        performPurchase()
+        performPurchase(bank)
     }
 
     const validateForm = () => amountRef.current.isValid(Linter.chargeAmountValidation())
 
-    const performPurchase = () => {
-        // TODO: Get the user bank
-        const USSD = BANK_USSDS["TEST"]
+    const performPurchase = (bank) => {
+        const USSD = BANK_USSDS[bank]
         Linking.openURL(`tel:*${USSD}*${amount}#`)
     }
 
@@ -136,7 +120,7 @@ export default function PurchaseScreen({ navigation }) {
                             icon="bank"
                             value={bank ? bank : _('misc.noBank')}
                             subtitle="SIM1"
-                            onPress={() => alert(operator)} />
+                            onPress={() => purchase(bank)} />
 
                         <Components.VSpace />
 
@@ -145,7 +129,7 @@ export default function PurchaseScreen({ navigation }) {
                             icon={!phone2 ? "phone-off" : (!bank2 ? "bank-off" : "bank")}
                             value={!phone2 ? _('misc.noSim') : (!bank2 ? _('misc.noBank') : bank2)}
                             subtitle="SIM2"
-                            onPress={() => alert(operator2)} />
+                            onPress={() => purchase(bank2)} />
                     </Components.Row>
 
                     <SettingsButton />
