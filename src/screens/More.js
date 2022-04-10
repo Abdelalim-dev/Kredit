@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import styled from 'styled-components'
 import { SessionContext } from '../../App'
 import { SessionPersistence } from '../services/persistence'
-import { List, Divider } from 'react-native-paper';
+import { List } from 'react-native-paper';
 
 import { Button } from 'src/components'
 import { ThemeDanger } from '../theme'
@@ -26,7 +26,8 @@ const Text = styled.Text`
 
 const Item = styled(List.Item)`
     background-color: #fdfdfd;
-    padding-horizontal: 16px;
+    padding-left: 16px;
+    padding-right: 16px;
     border-bottom-color: #f0f0f0;
     border-bottom-width: 1px;
 `
