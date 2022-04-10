@@ -42,8 +42,7 @@ export default function More() {
         sessionValue.changeSession(null)
     }
 
-    const { session: { phone, operator, bank, phone2, operator2 } } = sessionValue
-    // console.log({ session })
+    const { session: { phone, operator, bank, phone2, operator2, bank2 } } = sessionValue
     return (
         <SafeArea>
             <Image source={require('../assets/images/logo.png')} />
@@ -74,6 +73,12 @@ export default function More() {
                 title={operator2 || _('misc.none')}
                 description="SIM 2"
                 left={props => <List.Icon {...props} icon="sim-outline" />}
+            />
+
+            <Item
+                title={bank2 || _('misc.none')}
+                description={_('bank2')}
+                left={props => <List.Icon {...props} icon="bank" />}
             />
 
             <Container>
