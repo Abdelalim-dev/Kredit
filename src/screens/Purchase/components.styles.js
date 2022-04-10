@@ -69,4 +69,5 @@ export const Title = styled(T)`
 `
 
 export const EditProfileBtn = styled(Button)`
+    margin-top: 16px;
 `

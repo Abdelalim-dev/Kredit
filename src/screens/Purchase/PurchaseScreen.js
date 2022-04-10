@@ -68,8 +68,9 @@ export default function PurchaseScreen({ navigation }) {
 
     const openProfile = () => changeTab(TAB_MORE)
 
-    const SettingsButton = () => <EditProfileBtn
-        mode="text" uppercase={false} onPress={openProfile}>
+    const SettingsButton = () => <EditProfileBtn color="gray"
+        mode="text" uppercase={false} onPress={openProfile}
+        icon="cog">
         {_('common.openSettings')}
     </EditProfileBtn>
 
