@@ -67,3 +67,6 @@ export const Title = styled(T)`
     color: ${({ disabled }) => disabled ? '#989898' : '#FFF'};
     text-align: center;
 `
+
+export const EditProfileBtn = styled(Button)`
+`

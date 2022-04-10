@@ -25,6 +25,9 @@ const translation = {
     purchase: "Top up",
     balance: "Balance",
     more: "More",
+    common: {
+        openSettings: "Edit phone or bank in settings"
+    },
     screens: {
         setup: {
             save: "Save",

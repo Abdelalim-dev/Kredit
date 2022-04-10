@@ -5,7 +5,7 @@ import { Input, Button, Select } from '../../components'
 import * as Linter from '../../utils/Lint'
 import {
     SafeArea, ScrollView, KeyboardAvoidingView, Banner, AccessoryContainer,
-    Headline, FAB,
+    Headline, FAB, EditProfileBtn
 } from './components.styles'
 import * as Components from './components.styles'
 import { ROUTES } from '../../utils/Constants'
@@ -79,6 +79,13 @@ export default function PurchaseScreen({ navigation }) {
 
     const openScan = (operator) => navigation.push(ROUTES.SCAN, { operator })
 
+    const openProfile = () => alert('Open profile')
+
+    const SettingsButton = () => <EditProfileBtn
+        mode="text" uppercase={false} onPress={openProfile}>
+        {_('common.openSettings')}
+    </EditProfileBtn>
+
     const renderFAB = () => (operator2 && operator2 != operator) ? <FABGroup /> : <FABButton />
 
     const FABButton = () => <FAB icon="line-scan" onPress={() => openScan(operator)} />
@@ -141,6 +148,7 @@ export default function PurchaseScreen({ navigation }) {
                             onPress={() => alert(operator2)} />
                     </Components.Row>
 
+                    <SettingsButton />
                 </ScrollView>
             </KeyboardAvoidingView>
             {renderFAB()}
