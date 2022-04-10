@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useContext } from 'react'
 import { InputAccessoryView, Linking } from 'react-native';
 import { SessionContext } from '../../../App'
 import { Input, Button } from '../../components'
@@ -12,11 +12,14 @@ import { ROUTES } from '../../utils/Constants'
 import { BANK_USSDS } from 'src/utils/Constants'
 
 import bannerImage from 'src/assets/images/undraw_purchase.png'
+import { TabContext, TAB_MORE } from '../Home';
 
 
 const FIELD_AMOUNT = "amount"
 
 export default function PurchaseScreen({ navigation }) {
+
+    const { currentTab, changeTab } = useContext(TabContext)
 
     const { session: { phone2, operator, operator2, bank, bank2 } } = React.useContext(SessionContext)
 
@@ -63,7 +66,7 @@ export default function PurchaseScreen({ navigation }) {
 
     const openScan = (operator) => navigation.push(ROUTES.SCAN, { operator })
 
-    const openProfile = () => alert('Open profile')
+    const openProfile = () => changeTab(TAB_MORE)
 
     const SettingsButton = () => <EditProfileBtn
         mode="text" uppercase={false} onPress={openProfile}>
