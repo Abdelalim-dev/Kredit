@@ -19,7 +19,6 @@ const translation = {
         charge_amount: "Pleasse fill in the amount",
         formError: "Some of the fields in the form are invalid, please check the displayed error messages for more details.",
     },
-    login: "Login",
     next: "Next",
     done: "Done",
     scan: "Scan",
@@ -27,6 +26,9 @@ const translation = {
     balance: "Balance",
     more: "More",
     screens: {
+        setup: {
+            save: "Save",
+        },
         balance: {
             title: "Check your balance",
             noSim: "No SIM",

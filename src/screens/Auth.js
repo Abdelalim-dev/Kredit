@@ -52,14 +52,14 @@ export default function Auth() {
     const inputAccessoryViewID = 'uniqueID';
     const inputAccessoryViewID2 = 'uniqueID2';
 
-    const register = () => {
+    const saveSettings = () => {
         const isValid = validateForm()
         if (!isValid) return
 
-        performLogin()
+        performSaving()
     }
 
-    const performLogin = () => {
+    const performSaving = () => {
         let sessionData = {
             phone: phone,
             operator: selectedOp,
@@ -90,7 +90,7 @@ export default function Auth() {
                 Keyboard.dismiss()
                 break
             case FIELD_BANK:
-                register()
+                saveSettings()
                 break
         }
     }
@@ -151,7 +151,7 @@ export default function Auth() {
 
                     <Select label={_('bank2')} onItemSelected={setBank2} icon='bank' dense={true} items={BANKS} />
 
-                    <Button onPress={register}> {_('login')} </Button>
+                    <Button onPress={saveSettings}> {_('screens.setup.save')} </Button>
                 </ScrollView>
             </KeyboardAvoidingView>
             {inputAccessoryPhone1()}

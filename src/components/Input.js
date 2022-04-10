@@ -12,6 +12,10 @@ const Overlay = styled.Text`
 `
 const View = styled.View``
 
+const TextInputStyled = styled(TextInput)`
+    background-color: #FBFBFB;
+`
+
 function Input(props, ref) {
 
     const [errorMessage, setErrorMessage] = React.useState("")
@@ -73,15 +77,15 @@ function Input(props, ref) {
     return (
         <View style={{ marginBottom: 4, ...props.containerStyle }}>
             <View>
-                <TextInput
+                <TextInputStyled
                     ref={inputRef}
                     {...props}
-                    mode='outlined'
+                    underlineColor={"#DDD"}
                     autoCorrect={false}
                     onChangeText={handleTextChange}
                     error={errorMessage != ""}
-                    left={icon && <TextInput.Icon name={icon} />}
-                    right={right}
+                    left={icon && <TextInput.Icon color="#666" name={icon} />}
+                    right={props.value && right}
                 />
                 {inputOverlay && androidInputOverlay()}
             </View>

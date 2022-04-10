@@ -64,7 +64,7 @@ function Select(props, ref) {
             {...props}
             params={{
                 icon: props.icon || "",
-                right: <TextInput.Icon name='close' onPress={clear} />,
+                right: <TextInput.Icon name='close' color="#AAA" onPress={clear} />,
                 inputOverlay: Platform.OS == 'android'
             }}
         />

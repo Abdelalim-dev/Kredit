@@ -49,7 +49,7 @@ function OperatorMenu(props, ref) {
             dense={props.dense}
             params={{
                 icon: 'sim',
-                right: <TextInput.Icon name='close' onPress={clear} />,
+                right: <TextInput.Icon name='close' color="#AAA" onPress={clear} />,
                 inputOverlay: Platform.OS == 'android'
             }}
         />
