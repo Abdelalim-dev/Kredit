@@ -31,6 +31,10 @@ const AccessoryContainer = styled.View`
     background-color: #D1D4D9;
 `
 
+const SaveButton = styled(Button)`
+    margin-bottom: 16px;
+`
+
 const FIELD_PHONE = "phone"
 const FIELD_PHONE2 = "phone2"
 const FIELD_BANK = "bank"
@@ -108,8 +112,8 @@ export default function Auth() {
 
     return (
         <SafeArea>
-            <KeyboardAvoidingView style={{ marginHorizontal: 16 }} behavior={Platform.OS == 'ios' ? "position" : "height"}>
-                <ScrollView keyboardShouldPersistTaps="handled">
+            <KeyboardAvoidingView behavior={Platform.OS == 'ios' ? "position" : "height"}>
+                <ScrollView style={{ paddingHorizontal: 16 }} keyboardShouldPersistTaps="handled">
 
                     <Image source={require('../assets/images/logo.png')} />
 
@@ -130,6 +134,7 @@ export default function Auth() {
 
                     <OperatorMenu ref={opRef} label={_('sim1')} onItemSelected={setOp} />
 
+                    <Caption>Maybe we hide the BANKs here</Caption>
                     <Select label={_('bank')} onItemSelected={setBank} icon='bank' items={BANKS} />
 
                     <Divider />
@@ -151,7 +156,7 @@ export default function Auth() {
 
                     <Select label={_('bank2')} onItemSelected={setBank2} icon='bank' dense={true} items={BANKS} />
 
-                    <Button onPress={saveSettings}> {_('screens.setup.save')} </Button>
+                    <SaveButton onPress={saveSettings}> {_('screens.setup.save')} </SaveButton>
                 </ScrollView>
             </KeyboardAvoidingView>
             {inputAccessoryPhone1()}
