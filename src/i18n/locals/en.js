@@ -49,7 +49,7 @@ const translation = {
             codeDetected: "Voucher code detected!",
             tryAgain: "Try again",
             suggestionsTitle: "Suggestions",
-            description: "If you don't see your code please consider removing some suggestions. Others will showup",
+            description: "Select the correct airtime code and dial number",
             noSuggestions: "If this is taking long, please reset the scan",
             reset: "Reset",
             cameraNotAuthorizedTitle: "Camera not authorized",
