@@ -49,9 +49,6 @@ export const FAB = styled(FloatingButton)`
 export const Row = styled.View`
     flex-direction:row;
     justify-content: space-between;
-    margin-left: 16px;
-    margin-right: 16px;
-    margin-top: 16px;
 `
 
 export const Column = styled.View`
