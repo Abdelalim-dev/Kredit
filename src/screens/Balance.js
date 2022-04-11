@@ -1,6 +1,6 @@
 import React from 'react'
 import { Linking } from 'react-native'
-import { Button } from '../components'
+import { Button, SettingsButton } from '../components'
 import styled from 'styled-components'
 import { Caption as CaptionPaper, Headline, Title as TitlePaper } from 'react-native-paper'
 
@@ -96,6 +96,7 @@ export default function Balance() {
                     <Caption>SIM2</Caption>
                 </Column>
             </Row>
+            <SettingsButton />
         </SafeArea>
     )
 }
