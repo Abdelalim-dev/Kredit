@@ -166,6 +166,11 @@ export default function Auth() {
                     <Select label={_('bank2')} value={bank2} onItemSelected={setBank2} icon='bank' dense={true} items={BANKS} />
 
                     <SaveButton onPress={saveSettings}> {_('screens.settings.save')} </SaveButton>
+
+                    {__DEV__ && <Button mode="outlined" onPress={() => {
+                        SessionPersistence.remove()
+                        sessionValue.changeSession(null)
+                    }}>Logout</Button>}
                 </ScrollView>
             </KeyboardAvoidingView>
             {inputAccessoryPhone1()}
