@@ -31,9 +31,7 @@ const AccessoryContainer = styled.View`
     background-color: #D1D4D9;
 `
 
-const SaveButton = styled(Button)`
-    margin-bottom: 16px;
-`
+const SaveButton = styled(Button)``
 
 const FIELD_PHONE = "phone"
 const FIELD_PHONE2 = "phone2"
@@ -125,7 +123,7 @@ export default function Auth() {
     return (
         <SafeArea>
             <KeyboardAvoidingView behavior={Platform.OS == 'ios' ? "position" : "height"}>
-                <ScrollView style={{ paddingHorizontal: 16 }} keyboardShouldPersistTaps="handled">
+                <ScrollView keyboardShouldPersistTaps="handled">
 
                     <Image source={require('../assets/images/logo.png')} />
 
