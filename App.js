@@ -9,7 +9,7 @@
 import React, { useEffect, useState, createContext } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { Provider as PaperProvider } from 'react-native-paper';
-import { Home, Auth } from './src/screens'
+import { Home, Settings } from './src/screens'
 import i18next from 'i18next';
 import { withTranslation } from 'react-i18next';
 import * as i18n from './src/i18n'
@@ -65,7 +65,7 @@ const App = () => {
           {isLoggedIn === null ?
             <Loader /> : isLoggedIn ?
               < Home /> :
-              <Auth />
+              <Settings />
           }
         </SessionContext.Provider>
       </PaperProvider>
