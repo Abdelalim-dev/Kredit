@@ -40,13 +40,12 @@ function OperatorMenu(props, ref) {
 
     const menuAnchor = () => (
         <Input
-            {...props}
             ref={inputRef}
             onPressIn={openMenu}
             label={props.label || _('sim')}
             editable={false}
             value={operator}
-            dense={props.dense}
+            {...props}
             params={{
                 icon: 'sim',
                 right: <TextInput.Icon name='close' color="#AAA" onPress={clear} />,

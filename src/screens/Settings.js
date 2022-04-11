@@ -142,10 +142,9 @@ export default function Auth() {
                         inputAccessoryViewID={inputAccessoryViewID}
                     />
 
-                    <OperatorMenu ref={opRef} label={_('sim1')} onItemSelected={setOp} />
+                    <OperatorMenu ref={opRef} label={_('sim1')} value={selectedOp} onItemSelected={setOp} />
 
-                    <Caption>Maybe we hide the BANKs here</Caption>
-                    <Select label={_('bank')} onItemSelected={setBank} icon='bank' items={BANKS} />
+                    <Select label={_('bank')} value={bank} onItemSelected={setBank} icon='bank' items={BANKS} />
 
                     <Divider />
                     <VerticalSpace />
@@ -162,9 +161,9 @@ export default function Auth() {
                         dense={true}
                     />
 
-                    <OperatorMenu ref={op2Ref} dense={true} label={_('sim2')} onItemSelected={setOp2} />
+                    <OperatorMenu ref={op2Ref} dense={true} label={_('sim2')} value={selectedOp2} onItemSelected={setOp2} />
 
-                    <Select label={_('bank2')} onItemSelected={setBank2} icon='bank' dense={true} items={BANKS} />
+                    <Select label={_('bank2')} value={bank2} onItemSelected={setBank2} icon='bank' dense={true} items={BANKS} />
 
                     <SaveButton onPress={saveSettings}> {_('screens.settings.save')} </SaveButton>
                 </ScrollView>
