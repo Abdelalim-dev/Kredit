@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const ScrollView = styled.ScrollView`
-    padding-left: 16;
-    padding-right: 16;
-    margin-bottom: 16;
+    padding-left: 16px;
+    padding-right: 16px;
+    margin-bottom: 16px;
 `
