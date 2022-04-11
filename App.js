@@ -9,6 +9,7 @@
 import React, { useEffect, useState, createContext } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { Provider as PaperProvider } from 'react-native-paper';
+import Toast from 'react-native-toast-message';
 import { Home, Settings } from './src/screens'
 import i18next from 'i18next';
 import { withTranslation } from 'react-i18next';
@@ -67,6 +68,7 @@ const App = () => {
               < Home /> :
               <Settings />
           }
+          <Toast />
         </SessionContext.Provider>
       </PaperProvider>
     </NavigationContainer>
