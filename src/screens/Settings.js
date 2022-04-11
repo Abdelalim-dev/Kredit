@@ -37,7 +37,7 @@ const FIELD_PHONE = "phone"
 const FIELD_PHONE2 = "phone2"
 const FIELD_BANK = "bank"
 
-export default function Auth() {
+export default function Settings(props) {
     const sessionValue = useContext(SessionContext)
     const [phone, setPhone] = useState("");
     const [selectedOp, setOp] = useState(""); // Operator
@@ -84,6 +84,9 @@ export default function Auth() {
         }
         SessionPersistence.save(sessionData)
         sessionValue.changeSession(sessionData)
+        if (props.editing) {
+            alert('saved')
+        }
     }
 
     const validateForm = () => {
