@@ -1,25 +1,23 @@
-import React, { useState, useRef, useContext } from 'react'
+import React, { useState, useRef } from 'react'
 import { InputAccessoryView, Linking } from 'react-native';
 import { SessionContext } from '../../../App'
-import { Input, Button } from '../../components'
+import { Input, Button, SettingsButton } from '../../components'
 import * as Linter from '../../utils/Lint'
 import {
     SafeArea, ScrollView, KeyboardAvoidingView, Banner, AccessoryContainer,
-    Headline, FAB, EditProfileBtn
+    Headline, FAB
 } from './components.styles'
 import * as Components from './components.styles'
 import { ROUTES } from '../../utils/Constants'
 import { BANK_USSDS } from 'src/utils/Constants'
 
 import bannerImage from 'src/assets/images/undraw_purchase.png'
-import { TabContext, TAB_SETTINGS } from '../Home';
+
 
 
 const FIELD_AMOUNT = "amount"
 
 export default function PurchaseScreen({ navigation }) {
-
-    const { changeTab } = useContext(TabContext)
 
     const { session: { phone2, operator, operator2, bank, bank2 } } = React.useContext(SessionContext)
 
@@ -66,13 +64,6 @@ export default function PurchaseScreen({ navigation }) {
 
     const openScan = (operator) => navigation.push(ROUTES.SCAN, { operator })
 
-    const openSettings = () => changeTab(TAB_SETTINGS)
-
-    const SettingsButton = () => <EditProfileBtn color="gray"
-        mode="text" uppercase={false} onPress={openSettings}
-        icon="cog">
-        {_('common.openSettings')}
-    </EditProfileBtn>
 
     const renderFAB = () => (operator2 && operator2 != operator) ? <FABGroup /> : <FABButton />
 
