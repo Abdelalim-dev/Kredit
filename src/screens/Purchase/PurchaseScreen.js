@@ -12,14 +12,14 @@ import { ROUTES } from '../../utils/Constants'
 import { BANK_USSDS } from 'src/utils/Constants'
 
 import bannerImage from 'src/assets/images/undraw_purchase.png'
-import { TabContext, TAB_MORE } from '../Home';
+import { TabContext, TAB_SETTINGS } from '../Home';
 
 
 const FIELD_AMOUNT = "amount"
 
 export default function PurchaseScreen({ navigation }) {
 
-    const { currentTab, changeTab } = useContext(TabContext)
+    const { changeTab } = useContext(TabContext)
 
     const { session: { phone2, operator, operator2, bank, bank2 } } = React.useContext(SessionContext)
 
@@ -66,10 +66,10 @@ export default function PurchaseScreen({ navigation }) {
 
     const openScan = (operator) => navigation.push(ROUTES.SCAN, { operator })
 
-    const openProfile = () => changeTab(TAB_MORE)
+    const openSettings = () => changeTab(TAB_SETTINGS)
 
     const SettingsButton = () => <EditProfileBtn color="gray"
-        mode="text" uppercase={false} onPress={openProfile}
+        mode="text" uppercase={false} onPress={openSettings}
         icon="cog">
         {_('common.openSettings')}
     </EditProfileBtn>
