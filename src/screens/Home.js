@@ -6,7 +6,8 @@ export const TabContext = createContext()
 
 export const TAB_PURCHASE = 0
 export const TAB_BALANCE = 1
-export const TAB_MORE = 2
+export const TAB_SETTINGS = 2
+export const TAB_HOME = 3
 
 export default function Home() {
 
@@ -24,11 +25,16 @@ export default function Home() {
         // { key: "more", title: _('more'), icon: 'dots-horizontal' },
     ])
 
-    const renderScene = BottomNavigation.SceneMap({
-        purchase: Purchase,
-        balance: Balance,
-        settings: Settings,
-    })
+    const renderScene = ({ route, jumpTo }) => {
+        switch (route.key) {
+            case 'purchase':
+                return <Purchase jumpTo={jumpTo} />
+            case 'balance':
+                return <Balance jumpTo={jumpTo} />
+            case 'settings':
+                return <Settings jumpTo={jumpTo} editing />
+        }
+    }
 
     return (
         <TabContext.Provider value={tabValue}>
