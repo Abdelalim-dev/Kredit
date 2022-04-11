@@ -24,12 +24,13 @@ const translation = {
     scan: "Scan",
     purchase: "Top up",
     balance: "Balance",
+    settings: "Settings",
     more: "More",
     common: {
         openSettings: "Edit phone or bank in settings"
     },
     screens: {
-        setup: {
+        settings: {
             save: "Save",
         },
         balance: {

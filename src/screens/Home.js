@@ -1,5 +1,5 @@
 import React, { createContext } from 'react'
-import { Purchase, Balance, More } from './'
+import { Purchase, Balance, Settings, More } from './'
 import { BottomNavigation } from 'react-native-paper';
 
 export const TabContext = createContext()
@@ -20,13 +20,14 @@ export default function Home() {
     const [routes] = React.useState([
         { key: "purchase", title: _('purchase'), icon: 'plus-circle-outline' },
         { key: "balance", title: _('balance'), icon: 'wallet-outline' },
-        { key: "more", title: _('more'), icon: 'dots-horizontal' },
+        { key: "settings", title: _('settings'), icon: 'cog' },
+        // { key: "more", title: _('more'), icon: 'dots-horizontal' },
     ])
 
     const renderScene = BottomNavigation.SceneMap({
         purchase: Purchase,
         balance: Balance,
-        more: More,
+        settings: Settings,
     })
 
     return (

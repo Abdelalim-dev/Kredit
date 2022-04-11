@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { InputAccessoryView, Keyboard } from 'react-native';
 import styled from 'styled-components'
 import { SessionContext } from '../../App'
@@ -40,7 +40,7 @@ const FIELD_PHONE2 = "phone2"
 const FIELD_BANK = "bank"
 
 export default function Auth() {
-    const session = useContext(SessionContext)
+    const sessionValue = useContext(SessionContext)
     const [phone, setPhone] = useState("");
     const [selectedOp, setOp] = useState(""); // Operator
     const [phone2, setPhone2] = useState("");
@@ -55,6 +55,18 @@ export default function Auth() {
 
     const inputAccessoryViewID = 'uniqueID';
     const inputAccessoryViewID2 = 'uniqueID2';
+
+    useEffect(() => {
+        const { session } = sessionValue
+        if (session) {
+            setPhone(session.phone)
+            setOp(session.operator)
+            setPhone2(session.phone2)
+            setOp2(session.operator2)
+            setBank(session.bank)
+            setBank2(session.bank2)
+        }
+    }, [])
 
     const saveSettings = () => {
         const isValid = validateForm()
@@ -73,7 +85,7 @@ export default function Auth() {
             bank2: bank2,
         }
         SessionPersistence.save(sessionData)
-        session.changeSession(sessionData)
+        sessionValue.changeSession(sessionData)
     }
 
     const validateForm = () => {
@@ -156,7 +168,7 @@ export default function Auth() {
 
                     <Select label={_('bank2')} onItemSelected={setBank2} icon='bank' dense={true} items={BANKS} />
 
-                    <SaveButton onPress={saveSettings}> {_('screens.setup.save')} </SaveButton>
+                    <SaveButton onPress={saveSettings}> {_('screens.settings.save')} </SaveButton>
                 </ScrollView>
             </KeyboardAvoidingView>
             {inputAccessoryPhone1()}
