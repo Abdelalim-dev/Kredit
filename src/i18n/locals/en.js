@@ -32,6 +32,7 @@ const translation = {
     screens: {
         settings: {
             save: "Save",
+            saved: "Settings saved 👌",
         },
         balance: {
             title: "Check your balance",

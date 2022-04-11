@@ -1,10 +1,11 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { InputAccessoryView, Keyboard } from 'react-native';
 import styled from 'styled-components'
+import { Divider, Caption } from 'react-native-paper';
+import Toast from 'react-native-toast-message';
 import { SessionContext } from '../../App'
 import { Input, Button, OperatorMenu, Select } from '../components'
 import { ScrollView } from '../components/styles'
-import { Divider, Caption } from 'react-native-paper';
 import * as Linter from '../utils/Lint'
 import { SessionPersistence } from '../services/persistence'
 import { BANKS } from 'src/utils/Constants'
@@ -85,7 +86,10 @@ export default function Settings(props) {
         SessionPersistence.save(sessionData)
         sessionValue.changeSession(sessionData)
         if (props.editing) {
-            alert('saved')
+            Toast.show({
+                type: 'success',
+                text1: _('screens.settings.saved'),
+            });
         }
     }
 
