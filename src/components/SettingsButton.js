@@ -1,24 +1,25 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components'
-import Button from './Button'
 import { TabContext, TAB_SETTINGS } from '../screens/Home';
+import { IconButton, Caption } from 'react-native-paper';
 
-const EditProfileBtn = styled(Button)`
-    margin-top: 16px;
+const EditProfileBtn = styled.TouchableOpacity`
+    flex-direction: row;
+    align-items: center;
+`
+const ButtonText = styled(Caption)`
+    font-size:14px;
 `
 
-export default SettingsButton = () => {
+export default SettingsButton = (props) => {
 
     const { changeTab } = useContext(TabContext)
 
     const openSettings = () => changeTab(TAB_SETTINGS)
 
-    return <EditProfileBtn
-        color="gray"
-        icon="cog"
-        mode="text"
-        uppercase={false}
-        onPress={openSettings}>
-        {_('common.openSettings')}
+    return <EditProfileBtn onPress={openSettings} {...props}>
+        <IconButton size={16} color="gray" icon="cog" />
+        <ButtonText color="gray">{_('common.openSettings')}</ButtonText>
     </EditProfileBtn>
+
 }
