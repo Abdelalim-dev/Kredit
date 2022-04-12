@@ -17,7 +17,7 @@ export default SettingsButton = (props) => {
 
     const openSettings = () => changeTab(TAB_SETTINGS)
 
-    return <EditProfileBtn onPress={openSettings} {...props}>
+    return <EditProfileBtn activeOpacity={0.7} onPress={openSettings} {...props}>
         <IconButton size={16} color="gray" icon="cog" />
         <ButtonText color="gray">{_('common.openSettings')}</ButtonText>
     </EditProfileBtn>
