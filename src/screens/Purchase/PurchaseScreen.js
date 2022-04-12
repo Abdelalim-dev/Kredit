@@ -1,11 +1,11 @@
 import React, { useState, useRef } from 'react'
 import { InputAccessoryView, Linking } from 'react-native';
 import { SessionContext } from '../../../App'
-import { Input, Button, SettingsButton } from '../../components'
+import { Input, Button } from '../../components'
 import * as Linter from '../../utils/Lint'
 import {
     SafeArea, ScrollView, KeyboardAvoidingView, Banner, AccessoryContainer,
-    Headline, FAB
+    Headline, FAB, SettingsButton
 } from './components.styles'
 import * as Components from './components.styles'
 import { ROUTES } from '../../utils/Constants'

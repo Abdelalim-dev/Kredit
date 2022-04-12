@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Button } from '../../components'
+import { Button, SettingsButton as SettingsBtn } from '../../components'
 import { Caption as CaptionPaper, Headline as H, FAB as FloatingButton, Title as T } from 'react-native-paper'
 
 
@@ -66,4 +66,9 @@ export const Caption = styled(CaptionPaper)`
 export const Title = styled(T)`
     color: ${({ disabled }) => disabled ? '#989898' : '#FFF'};
     text-align: center;
+`
+
+
+export const SettingsButton = styled(SettingsBtn)`
+    margin-top: 16px;
 `

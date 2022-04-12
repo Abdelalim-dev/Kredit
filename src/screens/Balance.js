@@ -25,11 +25,15 @@ const Banner = styled.Image`
     width:auto;
 `
 
+const Container = styled.View`
+    margin-left: 16px;
+    margin-right: 16px;
+`
 const Row = styled.View`
     flex-direction:row;
     justify-content: space-between;
-    margin-left: 16px;
-    margin-right: 16px;
+    /* margin-left: 16px;
+    margin-right: 16px; */
     margin-top: 16px;
 `
 
@@ -76,27 +80,29 @@ export default function Balance() {
     return (
         <SafeArea>
             <Banner source={bannerImage} />
+            <Container>
+                <Description>{_('screens.balance.title')}</Description>
 
-            <Description>{_('screens.balance.title')}</Description>
+                <Row>
+                    <Column>
+                        <BigButton icon="sim" onPress={() => balanceFor(operator)}>
+                            <Title>{operator}</Title>
+                        </BigButton>
+                        <Caption>SIM1</Caption>
+                    </Column>
 
-            <Row>
-                <Column>
-                    <BigButton icon="sim" onPress={() => balanceFor(operator)}>
-                        <Title>{operator}</Title>
-                    </BigButton>
-                    <Caption>SIM1</Caption>
-                </Column>
+                    <VSpace />
 
-                <VSpace />
-
-                <Column>
-                    <BigButton icon={disabled ? "sim-off" : "sim"} {...{ disabled }} onPress={() => balanceFor(operator2)}>
-                        <Title {...{ disabled }}>{operator2 || _('screens.balance.noSim')}</Title>
-                    </BigButton>
-                    <Caption>SIM2</Caption>
-                </Column>
-            </Row>
-            <SettingsButton />
+                    <Column>
+                        <BigButton icon={disabled ? "sim-off" : "sim"} {...{ disabled }} onPress={() => balanceFor(operator2)}>
+                            <Title {...{ disabled }}>{operator2 || _('screens.balance.noSim')}</Title>
+                        </BigButton>
+                        <Caption>SIM2</Caption>
+                    </Column>
+                </Row>
+                
+                <SettingsButton />
+            </Container >
         </SafeArea>
     )
 }
