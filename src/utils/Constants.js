@@ -1,4 +1,4 @@
-export const operators = ['MTN', '9mobile', 'Airtel', 'Glo']
+export const OPERATORS = ['MTN', '9mobile', 'Airtel', 'Glo']
 
 export const balanceUSSD = {
     "MTN": "*556#",

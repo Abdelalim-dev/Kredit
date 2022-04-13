@@ -4,11 +4,11 @@ import styled from 'styled-components'
 import { Divider, Caption, Headline } from 'react-native-paper';
 import Toast from 'react-native-toast-message';
 import { SessionContext } from '../../App'
-import { Input, Button, OperatorMenu, Select } from '../components'
+import { Input, Button, Select } from '../components'
 import { ScrollView } from '../components/styles'
 import * as Linter from '../utils/Lint'
 import { SessionPersistence } from '../services/persistence'
-import { BANKS } from 'src/utils/Constants'
+import { BANKS, OPERATORS } from 'src/utils/Constants'
 
 const SafeArea = styled.SafeAreaView`
     flex:1;
@@ -156,7 +156,7 @@ export default function Settings(props) {
                         inputAccessoryViewID={inputAccessoryViewID}
                     />
 
-                    <OperatorMenu ref={opRef} label={_('sim1')} value={selectedOp} onItemSelected={setOp} />
+                    <Select ref={opRef} label={_('sim1')} value={selectedOp} onItemSelected={setOp} icon='sim' items={OPERATORS} />
 
                     <Select label={_('bank')} value={bank} onItemSelected={setBank} icon='bank' items={BANKS} />
 
@@ -175,7 +175,7 @@ export default function Settings(props) {
                         dense={true}
                     />
 
-                    <OperatorMenu ref={op2Ref} dense={true} label={_('sim2')} value={selectedOp2} onItemSelected={setOp2} />
+                    <Select ref={op2Ref} dense={true} label={_('sim2')} value={selectedOp2} onItemSelected={setOp2} icon='sim' items={OPERATORS} />
 
                     <Select label={_('bank2')} value={bank2} onItemSelected={setBank2} icon='bank' dense={true} items={BANKS} />
 
