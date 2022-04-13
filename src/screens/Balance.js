@@ -1,6 +1,6 @@
 import React from 'react'
 import { Linking } from 'react-native'
-import { Button, SettingsButton } from '../components'
+import { BigButton, SettingsButton } from '../components'
 import styled from 'styled-components'
 import { Caption as CaptionPaper, Headline, Title as TitlePaper } from 'react-native-paper'
 
@@ -54,15 +54,6 @@ const Title = styled(TitlePaper)`
     text-align: center;
 `
 
-const BigButton = (props) => {
-    return (
-        <Button style={{ justifyContent: 'center' }}
-            contentStyle={{ height: 150 }} {...props}>
-            {props.children}
-        </Button>
-    )
-}
-
 export default function Balance() {
     const SessionValue = React.useContext(SessionContext)
     const { session: { phone, operator, phone2, operator2 } } = SessionValue
@@ -84,23 +75,22 @@ export default function Balance() {
                 <Description>{_('screens.balance.title')}</Description>
 
                 <Row>
-                    <Column>
-                        <BigButton icon="sim" onPress={() => balanceFor(operator)}>
-                            <Title>{operator}</Title>
-                        </BigButton>
-                        <Caption>SIM1</Caption>
-                    </Column>
+                    <BigButton
+                        icon="sim"
+                        value={operator}
+                        subtitle="SIM1"
+                        onPress={() => balanceFor(operator)} />
 
                     <VSpace />
 
-                    <Column>
-                        <BigButton icon={disabled ? "sim-off" : "sim"} {...{ disabled }} onPress={() => balanceFor(operator2)}>
-                            <Title {...{ disabled }}>{operator2 || _('screens.balance.noSim')}</Title>
-                        </BigButton>
-                        <Caption>SIM2</Caption>
-                    </Column>
+                    <BigButton
+                        disabled={disabled}
+                        icon={disabled ? "sim-off" : "sim"}
+                        value={operator2 || _('screens.balance.noSim')}
+                        subtitle="SIM2"
+                        onPress={() => balanceFor(operator2)} />
                 </Row>
-                
+
                 <SettingsButton />
             </Container >
         </SafeArea>
