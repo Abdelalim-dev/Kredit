@@ -130,7 +130,7 @@ export default function Settings(props) {
     return (
         <SafeArea>
             <KeyboardAvoidingView behavior={Platform.OS == 'ios' ? "position" : "height"}>
-                <ScrollView keyboardShouldPersistTaps="handled">
+                <ScrollView contentContainerStyle={{ paddingBottom: 16 }} keyboardShouldPersistTaps="handled">
 
                     <Image source={require('../assets/images/logo.png')} />
 
