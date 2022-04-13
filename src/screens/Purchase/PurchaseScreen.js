@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { InputAccessoryView, Linking } from 'react-native';
 import { SessionContext } from '../../../App'
-import { Input, Button } from '../../components'
+import { Input, Button, BigButton } from '../../components'
 import * as Linter from '../../utils/Lint'
 import {
     SafeArea, ScrollView, KeyboardAvoidingView, Banner, AccessoryContainer,
@@ -79,16 +79,6 @@ export default function PurchaseScreen({ navigation }) {
             ]}
             onStateChange={setFabOpen}
         />
-    }
-
-    const BigButton = (props) => {
-        const { subtitle } = props;
-        return <Components.Column>
-            <Button contentStyle={{ height: 150 }} {...props}>
-                <Components.Title disabled={props.disabled}>{props.value}</Components.Title>
-            </Button>
-            <Components.Caption>{subtitle}</Components.Caption>
-        </Components.Column>
     }
 
 
