@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { InputAccessoryView, Keyboard } from 'react-native';
 import styled from 'styled-components'
-import { Divider, Caption } from 'react-native-paper';
+import { Divider, Caption, Headline } from 'react-native-paper';
 import Toast from 'react-native-toast-message';
 import { SessionContext } from '../../App'
 import { Input, Button, OperatorMenu, Select } from '../components'
@@ -116,6 +116,13 @@ export default function Settings(props) {
         }
     }
 
+    const Header = (_props) => {
+        if (props.editing)
+            return <Headline {..._props}>{_('screens.settings.title')}</Headline>
+        else
+            return <Image source={require('../assets/images/logo.png')} {..._props} />
+    }
+
     const inputAccessoryPhone1 = () => inputAccessoryView(inputAccessoryViewID, () => onReturn(FIELD_PHONE))
     const inputAccessoryPhone2 = () => inputAccessoryView(inputAccessoryViewID2, () => onReturn(FIELD_PHONE2), _('done'))
     const inputAccessoryView = (inputID, onPress, buttonTitle = _('next')) => (
@@ -132,7 +139,7 @@ export default function Settings(props) {
             <KeyboardAvoidingView behavior={Platform.OS == 'ios' ? "position" : "height"}>
                 <ScrollView contentContainerStyle={{ paddingBottom: 16 }} keyboardShouldPersistTaps="handled">
 
-                    <Image source={require('../assets/images/logo.png')} />
+                    <Header style={{ marginTop: 16, textAlign: 'center' }} />
 
                     <VerticalSpace />
 
