@@ -39,12 +39,17 @@ function Select(props, ref) {
     const handleItemSelected = (value) => {
         const { onItemSelected } = props
         setValue(value)
-        
+
         // For default anchor only
         !props.customAnchor && inputRef.current.handleTextChange(value)
-        
+
         onItemSelected && onItemSelected(value)
         closeMenu()
+    }
+
+    const onRightPress = () => {
+        if (value || props.value) clear()
+        else setVisible(true)
     }
 
     const clear = () => {
@@ -64,7 +69,9 @@ function Select(props, ref) {
             {...props}
             params={{
                 icon: props.icon || "",
-                right: <TextInput.Icon name='close' color="#AAA" onPress={clear} />,
+                right: <TextInput.Icon
+                    name={(props.value || value) ? 'close' : 'chevron-down'}
+                    color="#AAA" onPress={onRightPress} />,
                 inputOverlay: Platform.OS == 'android'
             }}
         />

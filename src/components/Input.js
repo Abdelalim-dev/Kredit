@@ -85,7 +85,7 @@ function Input(props, ref) {
                     onChangeText={handleTextChange}
                     error={errorMessage != ""}
                     left={icon && <TextInput.Icon color="#666" name={icon} />}
-                    right={props.value && right}
+                    right={right}
                 />
                 {inputOverlay && androidInputOverlay()}
             </View>
