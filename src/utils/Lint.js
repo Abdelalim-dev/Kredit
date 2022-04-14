@@ -32,7 +32,7 @@ export const requiredIf = (value, other) => {
 export const phone = (value, nullable = false) => {
     if (nullable && empty(value)) return true
 
-    return value.match(/(080|081|070|090)[0-9]{8}/g) != null
+    return value.match(/^(080|081|070|090)[0-9]{8}$/g) != null
 }
 
 export const number = (value) => {
