@@ -119,7 +119,7 @@ export default function Settings(props) {
 
     const Header = (_props) => {
         if (props.editing)
-            return <Headline {..._props}>{_('screens.settings.title')}</Headline>
+            return <Headline style={{ textAlign: 'center' }} {..._props}>{_('screens.settings.title')}</Headline>
         else
             return <Image source={require('../assets/images/logo.png')} {..._props} />
     }
@@ -140,7 +140,7 @@ export default function Settings(props) {
             <KeyboardAvoidingView behavior={Platform.OS == 'ios' ? "position" : "height"}>
                 <ScrollView contentContainerStyle={{ paddingBottom: 16 }} keyboardShouldPersistTaps="handled">
 
-                    <Header style={{ marginTop: 16, textAlign: 'center' }} />
+                    <Header style={{ marginTop: 16 }} />
 
                     <VerticalSpace />
 
