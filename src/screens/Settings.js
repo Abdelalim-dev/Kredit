@@ -137,7 +137,7 @@ export default function Settings(props) {
 
     return (
         <SafeArea>
-            <KeyboardAvoidingView behavior={Platform.OS == 'ios' ? "position" : "height"}>
+            <KeyboardAvoidingView behavior={Platform.OS == 'ios' ? "padding" : "height"}>
                 <ScrollView contentContainerStyle={{ paddingBottom: 16 }} keyboardShouldPersistTaps="handled">
 
                     <Header style={{ marginTop: 16 }} />
