@@ -29,7 +29,6 @@ export const Subtitle = styled(Caption)`
 `
 
 export default BigButton = (props) => {
-    console.log(props)
     const { disabled, value, icon, subtitle, uppercase } = props;
     const title = (uppercase == undefined || uppercase) ? value?.toUpperCase() : value;
 
