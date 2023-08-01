@@ -16,7 +16,7 @@ import { withTranslation } from 'react-i18next';
 import * as i18n from './src/i18n'
 import * as i18nPersistance from './src/i18n/persistance'
 import theme from './src/theme'
-import { SessionPersistence } from 'src/services/persistence'
+import { SessionPersistence } from './src/services/persistence'
 import { Loader } from 'src/components'
 
 export const SessionContext = createContext()
@@ -48,9 +48,10 @@ const App = () => {
     setIsLoggedIn(sessionData != null)
   }
 
-  const updateSession = (session) => {
+  const updateSession = async (session) => {
     setSession(session)
     setIsLoggedIn(session != null)
+    await SessionPersistence.save(session)
   }
 
   const sessionValue = {

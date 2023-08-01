@@ -1,6 +1,8 @@
-import React, { createContext } from 'react'
+import React, { createContext, useContext } from 'react'
 import { Purchase, Balance, Settings, More } from './'
 import { BottomNavigation } from 'react-native-paper';
+import { SessionContext } from '../../App';
+import { postCustomer } from '../services/api/customer'
 
 export const TabContext = createContext()
 
@@ -10,6 +12,8 @@ export const TAB_SETTINGS = 2
 export const TAB_HOME = 3
 
 export default function Home() {
+
+    const { session, changeSession } = useContext(SessionContext)
 
     const [index, setIndex] = React.useState(0)
 
@@ -24,6 +28,22 @@ export default function Home() {
         { key: "settings", title: _('settings'), icon: 'cog' },
         // { key: "more", title: _('more'), icon: 'dots-horizontal' },
     ])
+
+    React.useEffect(() => {
+        syncUpSession()
+    }, [session])
+
+    const syncUpSession = () => {
+
+        postCustomer(session).then(({ id }) => {
+
+            if (session['id'] == undefined) {
+                changeSession({ id, ...session })
+            }
+        })
+
+        // TODO (refactor): session sync is performed on Settings update also!
+    }
 
     const renderScene = ({ route, jumpTo }) => {
         switch (route.key) {
