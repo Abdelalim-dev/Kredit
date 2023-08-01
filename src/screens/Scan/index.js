@@ -14,7 +14,7 @@ import * as Components from './components.styles'
 import { Button } from 'src/components'
 import { IconButton } from 'react-native-paper';
 import { cameraPermissionOptions } from './config'
-import { AIRTIME_USSDS } from 'src/utils/Constants'
+import { AIRTIME_USSDS } from '../../utils/Constants'
 import * as Formatter from 'src/utils/Formatter'
 
 
