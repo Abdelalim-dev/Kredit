@@ -64,6 +64,7 @@ export default function Settings(props) {
     }
 
     const performSaving = () => {
+        
         let sessionData = {
             phone: phone,
             operator: selectedOp,
@@ -72,8 +73,9 @@ export default function Settings(props) {
             operator2: selectedOp2,
             bank2: bank2,
         }
-        SessionPersistence.save(sessionData)
+
         changeSession(sessionData)
+        
         if (props.editing) {
             Toast.show({
                 type: 'success',
@@ -172,7 +174,6 @@ export default function Settings(props) {
                     <SaveButton onPress={saveSettings}> {_('screens.settings.save')} </SaveButton>
 
                     {__DEV__ && <Button mode="outlined" onPress={() => {
-                        SessionPersistence.remove()
                         sessionValue.changeSession(null)
                     }}>Logout</Button>}
                 </ScrollView>
