@@ -7,8 +7,8 @@ import { SessionContext } from '../../App'
 import { Input, Button, Select } from '../components'
 import { ScrollView } from '../components/styles'
 import * as Linter from '../utils/Lint'
-import { SessionPersistence } from '../services/persistence'
 import { BANKS, OPERATORS } from 'src/utils/Constants'
+import { postCustomer } from '../services/api/customer';
 
 const SafeArea = styled.SafeAreaView`
     flex:1;
@@ -40,7 +40,7 @@ const FIELD_BANK = "bank"
 
 export default function Settings(props) {
     const { session, changeSession } = useContext(SessionContext)
-    
+
     const [phone, setPhone] = useState(session.phone || "");
     const [selectedOp, setOp] = useState(session.operator || ""); // Operator
     const [phone2, setPhone2] = useState(session.phone2 || "");
@@ -56,6 +56,16 @@ export default function Settings(props) {
     const inputAccessoryViewID = 'uniqueID';
     const inputAccessoryViewID2 = 'uniqueID2';
 
+    const syncUpSession = (session) => {
+
+        postCustomer(session).then(({ id }) => {
+
+            if (session['id'] == undefined) {
+                changeSession({ id, ...session })
+            }
+        })
+    }
+
     const saveSettings = () => {
         const isValid = validateForm()
         if (!isValid) return
@@ -64,7 +74,7 @@ export default function Settings(props) {
     }
 
     const performSaving = () => {
-        
+
         let sessionData = {
             phone: phone,
             operator: selectedOp,
@@ -75,7 +85,8 @@ export default function Settings(props) {
         }
 
         changeSession(sessionData)
-        
+        syncUpSession(sessionData)
+
         if (props.editing) {
             Toast.show({
                 type: 'success',

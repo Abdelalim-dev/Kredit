@@ -41,8 +41,6 @@ export default function Home() {
                 changeSession({ id, ...session })
             }
         })
-
-        // TODO (refactor): session sync is performed on Settings update also!
     }
 
     const renderScene = ({ route, jumpTo }) => {
