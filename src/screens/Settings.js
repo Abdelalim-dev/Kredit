@@ -39,13 +39,14 @@ const FIELD_PHONE2 = "phone2"
 const FIELD_BANK = "bank"
 
 export default function Settings(props) {
-    const sessionValue = useContext(SessionContext)
-    const [phone, setPhone] = useState("");
-    const [selectedOp, setOp] = useState(""); // Operator
-    const [phone2, setPhone2] = useState("");
-    const [selectedOp2, setOp2] = useState("");
-    const [bank, setBank] = useState("");
-    const [bank2, setBank2] = useState("");
+    const { session, changeSession } = useContext(SessionContext)
+    
+    const [phone, setPhone] = useState(session.phone || "");
+    const [selectedOp, setOp] = useState(session.operator || ""); // Operator
+    const [phone2, setPhone2] = useState(session.phone2 || "");
+    const [selectedOp2, setOp2] = useState(session.operator2 || "");
+    const [bank, setBank] = useState(session.bank || "");
+    const [bank2, setBank2] = useState(session.bank2 || "");
 
     const phoneRef = React.useRef()
     const opRef = React.useRef()
@@ -54,18 +55,6 @@ export default function Settings(props) {
 
     const inputAccessoryViewID = 'uniqueID';
     const inputAccessoryViewID2 = 'uniqueID2';
-
-    useEffect(() => {
-        const { session } = sessionValue
-        if (session) {
-            setPhone(session.phone)
-            setOp(session.operator)
-            setPhone2(session.phone2)
-            setOp2(session.operator2)
-            setBank(session.bank)
-            setBank2(session.bank2)
-        }
-    }, [])
 
     const saveSettings = () => {
         const isValid = validateForm()
@@ -84,7 +73,7 @@ export default function Settings(props) {
             bank2: bank2,
         }
         SessionPersistence.save(sessionData)
-        sessionValue.changeSession(sessionData)
+        changeSession(sessionData)
         if (props.editing) {
             Toast.show({
                 type: 'success',
