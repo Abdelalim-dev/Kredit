@@ -35,3 +35,8 @@ export const ROUTES = {
     PURCHASE: "Purchase",
     SCAN: "Scan",
 }
+
+export const TRANSACTION_TYPE = {
+    BANK: "bank",
+    VOUCHER: "voucher",
+}

@@ -10,7 +10,7 @@ const add = async function (transaction: any) {
     await SecurePersistence.storeData(KEY_TRANSACTIONS, JSON.stringify([...transactionList, transaction]));
 }
 
-const get = async function () {
+const get = async function (): Promise<[]> {
     const transactions = await SecurePersistence.retrieveData(KEY_TRANSACTIONS)
 
     if (transactions == null) return []

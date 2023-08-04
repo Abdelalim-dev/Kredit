@@ -14,8 +14,9 @@ import * as Components from './components.styles'
 import { Button } from 'src/components'
 import { IconButton } from 'react-native-paper';
 import { cameraPermissionOptions } from './config'
-import { AIRTIME_USSDS } from '../../utils/Constants'
+import { AIRTIME_USSDS, TRANSACTION_TYPE } from '../../utils/Constants'
 import * as Formatter from 'src/utils/Formatter'
+import TransactionPersistence from '../../services/persistence/TransactionPersistence';
 
 
 
@@ -84,11 +85,24 @@ export default function Scan({ navigation, route }) {
         Linking.openSettings()
     }
 
+    const makePurchase = (voucherCode, USSD) => {
+
+        const transaction = {
+            ussd: USSD,
+            type: TRANSACTION_TYPE.VOUCHER,
+            value: voucherCode,
+        }
+
+        TransactionPersistence.add(transaction)
+
+        Linking.openURL(`tel:*${USSD}*${voucherCode}#`)
+    }
+
     const CardItem = React.memo(({ index, number }) => {
 
         const USSDFromContext = AIRTIME_USSDS[SelectedOperator]
 
-        const dialNumber = (voucherCode = 0, USSD) => Linking.openURL(`tel:*${USSD}*${voucherCode}#`)
+        const dialNumber = (voucherCode = 0, USSD) => makePurchase(voucherCode, USSD)
 
         const removeFromSuggestions = (index, voucherCode) => {
             setSuggestions([...suggestions.slice(0, index), ...suggestions.slice(index + 1)])

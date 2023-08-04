@@ -8,10 +8,11 @@ import {
     Headline, FAB, SettingsButton
 } from './components.styles'
 import * as Components from './components.styles'
-import { ROUTES } from '../../utils/Constants'
+import { ROUTES, TRANSACTION_TYPE } from '../../utils/Constants'
 import { BANK_USSDS } from 'src/utils/Constants'
 
 import bannerImage from 'src/assets/images/undraw_purchase.png'
+import TransactionPersistence from '../../services/persistence/TransactionPersistence';
 
 
 
@@ -41,7 +42,18 @@ export default function PurchaseScreen({ navigation }) {
 
     const performPurchase = (bank) => {
         const USSD = BANK_USSDS[bank]
+
+        const transaction = {
+            ussd: USSD,
+            type: TRANSACTION_TYPE.BANK,
+            value: amount,
+        }
+
+        TransactionPersistence.add(transaction)
+
         Linking.openURL(`tel:*${USSD}*${amount}#`)
+
+        setAmount('')
     }
 
     const onReturn = (field) => {
