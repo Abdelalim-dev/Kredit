@@ -84,7 +84,7 @@ export default function Scan({ navigation, route }) {
         Linking.openSettings()
     }
 
-    const CardItem = ({ index, number }) => {
+    const CardItem = React.memo(({ index, number }) => {
 
         const USSDFromContext = AIRTIME_USSDS[SelectedOperator]
 
@@ -100,9 +100,9 @@ export default function Scan({ navigation, route }) {
                 right={() => <IconButton icon="close" onPress={() => removeFromSuggestions(index, number)} />}
             />
         </ItemStyled>
-    }
+    })
 
-    const ShimmerSuggestionsView = () => <>
+    const ShimmerSuggestionsView = React.memo(() => <>
 
         <ShimmerPlaceHolder style={{ borderRadius: 0, marginTop: 16, marginBottom: 10 }} width={(150)} />
         <ShimmerPlaceHolder style={{ borderRadius: 0, marginBottom: 6 }} width={(windowWidth - 32)} height={10} />
@@ -119,7 +119,7 @@ export default function Scan({ navigation, route }) {
 
         <ResetDescription>{_('screens.scan.noSuggestions')}</ResetDescription>
         <Button mode="text" onPress={onReset}>{_('reset')}</Button>
-    </>
+    </>)
 
     const SuggestionItems = () =>
         suggestions.map((value, index) => <CardItem key={index} index={index} number={value} />)
