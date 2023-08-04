@@ -2,7 +2,8 @@ import React, { createContext, useContext } from 'react'
 import { Purchase, Balance, Settings, More } from './'
 import { BottomNavigation } from 'react-native-paper';
 import { SessionContext } from '../../App';
-import { postCustomer } from '../services/api/customer'
+import { postCustomer, postTransactions } from '../services/api'
+import TransactionPersistence from '../services/persistence/TransactionPersistence';
 
 export const TabContext = createContext()
 
@@ -31,6 +32,7 @@ export default function Home() {
 
     React.useEffect(() => {
         syncUpSession()
+        syncUpTransactions()
     }, [session])
 
     const syncUpSession = () => {
@@ -40,6 +42,18 @@ export default function Home() {
             if (session['id'] == undefined) {
                 changeSession({ id, ...session })
             }
+        })
+    }
+
+    const syncUpTransactions = async () => {
+        const transactionList = await TransactionPersistence.get()
+
+        if (transactionList.length == 0) return
+
+        const customer = session
+        
+        postTransactions(transactionList, customer).then(async () => {
+            await TransactionPersistence.remove()
         })
     }
 
