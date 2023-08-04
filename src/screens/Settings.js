@@ -41,12 +41,12 @@ const FIELD_BANK = "bank"
 export default function Settings(props) {
     const { session, changeSession } = useContext(SessionContext)
 
-    const [phone, setPhone] = useState(session.phone || "");
-    const [selectedOp, setOp] = useState(session.operator || ""); // Operator
-    const [phone2, setPhone2] = useState(session.phone2 || "");
-    const [selectedOp2, setOp2] = useState(session.operator2 || "");
-    const [bank, setBank] = useState(session.bank || "");
-    const [bank2, setBank2] = useState(session.bank2 || "");
+    const [phone, setPhone] = useState(session?.phone || "");
+    const [selectedOp, setOp] = useState(session?.operator || ""); // Operator
+    const [phone2, setPhone2] = useState(session?.phone2 || "");
+    const [selectedOp2, setOp2] = useState(session?.operator2 || "");
+    const [bank, setBank] = useState(session?.bank || "");
+    const [bank2, setBank2] = useState(session?.bank2 || "");
 
     const phoneRef = React.useRef()
     const opRef = React.useRef()
