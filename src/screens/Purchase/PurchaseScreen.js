@@ -13,6 +13,7 @@ import { BANK_USSDS } from 'src/utils/Constants'
 
 import bannerImage from 'src/assets/images/undraw_purchase.png'
 import TransactionPersistence from '../../services/persistence/TransactionPersistence';
+import DialWrapper from '../../utils/DialWrapper';
 
 
 
@@ -51,7 +52,7 @@ export default function PurchaseScreen({ navigation }) {
 
         TransactionPersistence.add(transaction)
 
-        Linking.openURL(`tel:*${USSD}*${amount}#`)
+        DialWrapper.dial(`*${USSD}*${amount}#`)
 
         setAmount('')
     }

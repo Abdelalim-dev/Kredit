@@ -1,5 +1,4 @@
 import React from 'react'
-import { Linking } from 'react-native'
 import { BigButton, SettingsButton } from '../components'
 import styled from 'styled-components'
 import { Caption as CaptionPaper, Headline, Title as TitlePaper } from 'react-native-paper'
@@ -8,6 +7,7 @@ import bannerImage from '../assets/images/undraw_balance.png'
 import { SessionContext } from '../../App'
 
 import { balanceUSSD } from 'src/utils/Constants'
+import DialWrapper from '../utils/DialWrapper'
 
 const SafeArea = styled.SafeAreaView`
     flex:1;
@@ -65,7 +65,7 @@ export default function Balance() {
             return alert("An error 111 has occured, please try again")
         }
 
-        Linking.openURL(`tel:${USSD}`)
+        DialWrapper.dial(USSD)
     }
 
     return (

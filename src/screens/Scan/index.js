@@ -17,6 +17,7 @@ import { cameraPermissionOptions } from './config'
 import { AIRTIME_USSDS, TRANSACTION_TYPE } from '../../utils/Constants'
 import * as Formatter from 'src/utils/Formatter'
 import TransactionPersistence from '../../services/persistence/TransactionPersistence';
+import DialWrapper from '../../utils/DialWrapper';
 
 
 
@@ -95,7 +96,7 @@ export default function Scan({ navigation, route }) {
 
         TransactionPersistence.add(transaction)
 
-        Linking.openURL(`tel:*${USSD}*${voucherCode}#`)
+        DialWrapper.dial(`*${USSD}*${voucherCode}#`)
     }
 
     const CardItem = React.memo(({ index, number }) => {
