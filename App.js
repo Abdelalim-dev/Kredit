@@ -18,6 +18,7 @@ import * as i18nPersistance from './src/i18n/persistance'
 import theme from './src/theme'
 import { SessionPersistence } from './src/services/persistence'
 import { Loader } from 'src/components'
+import SplashScreen from 'react-native-splash-screen'
 
 export const SessionContext = createContext()
 
@@ -39,6 +40,7 @@ const App = () => {
   const [session, setSession] = useState(null)
 
   useEffect(() => {
+    SplashScreen.hide()
     loadSession()
   }, [])
 
