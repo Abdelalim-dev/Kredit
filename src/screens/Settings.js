@@ -185,7 +185,7 @@ export default function Settings(props) {
                     <SaveButton onPress={saveSettings}> {_('screens.settings.save')} </SaveButton>
 
                     {__DEV__ && <Button mode="outlined" onPress={() => {
-                        sessionValue.changeSession(null)
+                        changeSession(null)
                     }}>Logout</Button>}
                 </ScrollView>
             </KeyboardAvoidingView>
