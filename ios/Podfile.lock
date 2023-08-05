@@ -354,6 +354,8 @@ PODS:
     - react-native-camera/RN
   - react-native-encrypted-storage (4.0.2):
     - React-Core
+  - react-native-immediate-phone-call (2.0.0):
+    - React
   - react-native-safe-area-context (4.1.2):
     - RCT-Folly
     - RCTRequired
@@ -484,6 +486,7 @@ DEPENDENCIES:
   - react-native-camera (from `../node_modules/react-native-camera`)
   - react-native-camera/TextDetector (from `../node_modules/react-native-camera`)
   - react-native-encrypted-storage (from `../node_modules/react-native-encrypted-storage`)
+  - react-native-immediate-phone-call (from `../node_modules/react-native-immediate-phone-call`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
@@ -578,6 +581,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-camera"
   react-native-encrypted-storage:
     :path: "../node_modules/react-native-encrypted-storage"
+  react-native-immediate-phone-call:
+    :path: "../node_modules/react-native-immediate-phone-call"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
   React-perflogger:
@@ -663,6 +668,7 @@ SPEC CHECKSUMS:
   React-logger: 85f4ef06b9723714b2dfa5b0e5502b673b271b58
   react-native-camera: 3eae183c1d111103963f3dd913b65d01aef8110f
   react-native-encrypted-storage: e78d848ce0fb663c2ce306e37921d026809322e6
+  react-native-immediate-phone-call: eb8a86325478db6c066eac6ecf8fa9ba3fbf66c5
   react-native-safe-area-context: 114e9a74df2643012b9d6cc1460b94f3b6a90780
   React-perflogger: d32ee13196f4ae2e4098fb7f8e7ed4f864c6fb0f
   React-RCTActionSheet: 81779c09e34a6a3d6b15783407ba9016a774f535
