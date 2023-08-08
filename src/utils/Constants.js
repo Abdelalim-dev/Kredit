@@ -8,10 +8,10 @@ export const balanceUSSD = {
 }
 
 export const AIRTIME_USSDS = {
-    "MTN": "555",
-    "9mobile": "222",
-    "Airtel": "126",
-    "Glo": "123",
+    "MTN": "311",
+    "9mobile": "311",
+    "Airtel": "311",
+    "Glo": "311",
 }
 
 // *USSD* amount # 
